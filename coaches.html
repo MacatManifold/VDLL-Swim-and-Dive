@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coaches — Vista del Lago Eagles JV Swim</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #05091a;
+    --silver: #a8b8cc;
+    --silver-light: #d0dce8;
+    --white: #f4f8ff;
+    --muted: #7a9abf;
+    --accent: #c8d8ec;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--deep); color:var(--white); font-family:'DM Sans',sans-serif; overflow-x:hidden; min-height:100vh; display:flex; flex-direction:column; }
+
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 80%, rgba(13,31,74,.45) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(168,184,204,.05) 0%, transparent 55%),
+      linear-gradient(180deg,#05091a 0%,#0b1535 50%,#05091a 100%);
+  }
+  body::after {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(168,184,204,.03) 58px,rgba(168,184,204,.03) 60px);
+  }
+
+  /* TOP NAV */
+  .topnav { position:relative; z-index:20; display:flex; justify-content:center; gap:36px; padding:18px 24px; border-bottom:1px solid rgba(168,184,204,.08); }
+  .topnav a { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--silver); text-decoration:none; padding:6px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease, opacity .2s ease; opacity:.65; }
+  .topnav a:hover { color:var(--white); opacity:1; }
+  .topnav a.active { color:var(--white); border-bottom-color:var(--silver-light); opacity:1; }
+  @media (max-width:480px) { .topnav { gap:22px; padding:14px 16px; } .topnav a { font-size:10px; letter-spacing:.22em; } }
+
+  /* HEADER */
+  header { position:relative; z-index:10; padding:72px 40px 48px; text-align:center; border-bottom:1px solid rgba(168,184,204,.1); }
+  .header-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.35em; color:var(--silver); text-transform:uppercase; opacity:.7; margin-bottom:14px; }
+  .header-eagle { font-size:32px; margin-bottom:10px; filter:drop-shadow(0 0 12px rgba(168,184,204,.35)); opacity:.9; }
+  h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(46px,9vw,86px); letter-spacing:.08em; line-height:1;
+    background:linear-gradient(135deg,var(--white) 0%,var(--silver-light) 45%,var(--silver) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .header-sub { font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:.18em; margin-top:14px; text-transform:uppercase; opacity:.85; }
+
+  /* MAIN */
+  main { position:relative; z-index:10; flex:1; padding:80px 32px 100px; max-width:1100px; margin:0 auto; width:100%; }
+
+  .intro { text-align:center; max-width:620px; margin:0 auto 72px; }
+  .intro-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.32em; color:var(--silver); text-transform:uppercase; opacity:.6; margin-bottom:14px; }
+  .intro-text { font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.7; color:rgba(240,246,255,.72); font-weight:300; }
+
+  /* COACH GRID */
+  .coach-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:32px; }
+
+  /* COACH CARD */
+  .coach-card {
+    position:relative;
+    background:linear-gradient(165deg,rgba(13,31,74,.55),rgba(8,15,40,.65));
+    border:1px solid rgba(168,184,204,.14);
+    border-radius:14px;
+    padding:40px 36px 36px;
+    transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    overflow:hidden;
+  }
+  .coach-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg,var(--silver-light),transparent);
+    opacity:.6;
+  }
+  .coach-card:hover {
+    transform:translateY(-3px);
+    border-color:rgba(168,184,204,.28);
+    box-shadow:0 18px 40px rgba(0,0,0,.4);
+  }
+
+  .coach-portrait {
+    width:120px; height:120px; border-radius:50%;
+    background:linear-gradient(145deg,rgba(26,50,112,.6),rgba(13,31,74,.7));
+    border:1px solid rgba(168,184,204,.22);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 22px;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:42px; letter-spacing:.04em;
+    color:var(--silver-light);
+    box-shadow:inset 0 2px 12px rgba(0,0,0,.35);
+  }
+
+  .coach-name {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:36px; letter-spacing:.06em; line-height:1.05;
+    text-align:center;
+    background:linear-gradient(135deg,var(--white) 0%,var(--silver-light) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    margin-bottom:6px;
+  }
+  .coach-role {
+    font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:.28em;
+    text-transform:uppercase; text-align:center;
+    color:var(--silver); opacity:.72;
+    margin-bottom:24px;
+  }
+
+  .coach-divider {
+    width:42px; height:1px; margin:0 auto 22px;
+    background:linear-gradient(90deg,transparent,rgba(168,184,204,.45),transparent);
+  }
+
+  .coach-bio {
+    font-family:'DM Sans',sans-serif; font-size:14px; font-weight:300;
+    line-height:1.7; color:rgba(240,246,255,.55);
+    text-align:center;
+  }
+  .coach-bio.placeholder {
+    font-style:italic;
+    color:rgba(168,184,204,.5);
+  }
+
+  .coach-meta {
+    margin-top:24px; padding-top:20px;
+    border-top:1px solid rgba(168,184,204,.1);
+    display:flex; justify-content:center; gap:24px;
+    font-family:'DM Mono',monospace; font-size:9.5px;
+    letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); opacity:.6;
+  }
+
+  /* FOOTER */
+  footer { position:relative; z-index:10; text-align:center; padding:28px; font-family:'DM Mono',monospace; font-size:9.5px; color:rgba(168,184,204,.22); letter-spacing:.18em; border-top:1px solid rgba(168,184,204,.05); }
+
+  @media (max-width:560px) {
+    header { padding:52px 24px 36px; }
+    main { padding:56px 20px 80px; }
+    .intro { margin-bottom:48px; }
+    .coach-card { padding:32px 24px 28px; }
+    .coach-portrait { width:100px; height:100px; font-size:36px; }
+    .coach-name { font-size:30px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="swim-season-planner_3.html">JV</a>
+  <a href="varsity.html">Varsity</a>
+  <a href="coaches.html" class="active">Coaches</a>
+  <a href="equipment.html">Equipment</a>
+</nav>
+
+<header>
+  <div class="header-label">Vista del Lago High School · JV Swimming · 2027</div>
+  <div class="header-eagle">🦅</div>
+  <h1>Coaches</h1>
+  <div class="header-sub">Meet the Eagles Swim Staff</div>
+</header>
+
+<main>
+  <div class="intro">
+    <div class="intro-tag">— The Team Behind the Team —</div>
+    <p class="intro-text">The coaches building, refining, and pushing the Eagles JV swim program forward this season.</p>
+  </div>
+
+  <div class="coach-grid">
+
+    <article class="coach-card">
+      <div class="coach-portrait">M</div>
+      <div class="coach-name">Michael</div>
+      <div class="coach-role">Head Coach</div>
+      <div class="coach-divider"></div>
+      <p class="coach-bio placeholder">Bio coming soon.</p>
+      <div class="coach-meta">
+        <span>VDL Eagles</span>
+        <span>JV Swim</span>
+      </div>
+    </article>
+
+    <article class="coach-card">
+      <div class="coach-portrait">M</div>
+      <div class="coach-name">Mac</div>
+      <div class="coach-role">Assistant Coach</div>
+      <div class="coach-divider"></div>
+      <p class="coach-bio placeholder">Bio coming soon.</p>
+      <div class="coach-meta">
+        <span>VDL Eagles</span>
+        <span>JV Swim</span>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<footer>VISTA DEL LAGO EAGLES &nbsp;·&nbsp; JV SWIM &nbsp;·&nbsp; 2027 SEASON</footer>
+
+</body>
+</html>
