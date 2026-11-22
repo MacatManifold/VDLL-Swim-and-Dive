@@ -152,7 +152,7 @@ const weeks = [
       {t:'build', title:'Aerobic Base',    detail:'200s & 400s at easy cruise pace, stroke count focus'},
       {t:'build', title:'Pre-Meet Tune',   detail:'Race-pace 50s, start reps, event visualization'},
       {t:'build', title:'Recovery Swim',   detail:'Easy 200s, drill sets, kick focus'},
-      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
+      {t:'build', title:'Aerobic Push',     detail:'Quality practice, strong aerobic push'},
       {t:'ff',    title:'🎉 Fun Friday',   detail:'Meet warmup 1000 · threshold 50s · noodle relay battle'},
     ]},
 
@@ -163,7 +163,7 @@ const weeks = [
       {t:'build', title:'Threshold Ladders', detail:'100→200→400→200→100 at CSS pace'},
       {t:'build', title:'Pre-Meet Sharpener',detail:'8×50 at goal pace, relay exchange practice'},
       {t:'build', title:'Active Recovery',   detail:'Drill & kick sets, loosen post-meet'},
-      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
+      {t:'build', title:'Aerobic Push',     detail:'Quality practice, strong aerobic push'},
       {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · pull set · partner towing race'},
     ]},
 
@@ -186,7 +186,7 @@ const weeks = [
       {t:'build', title:'Race Simulation',   detail:'Full event swims at race pace, timed trials'},
       {t:'build', title:'Pre-Meet Sharpener',detail:'Fast 50s, relay handoffs, mental prep'},
       {t:'build', title:'Peak Yardage Day',  detail:'Season-high 4000 yds — long aerobic sets'},
-      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
+      {t:'build', title:'Aerobic Push',     detail:'Quality practice, strong aerobic push'},
       {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · speed 25s · diving rings game'},
     ]},
 
