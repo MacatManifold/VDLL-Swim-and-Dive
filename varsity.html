@@ -282,7 +282,7 @@ class Component extends DCLogic {
       const dates = S.weekDates(wk.mon);
       const prac = wk.yds.filter(y => y !== null);
       const avg = prac.length ? Math.round(prac.reduce((a, b) => a + b, 0) / prac.length) : null;
-      const d4 = new Date(wk.mon); d4.setDate(d4.getDate() + 4);
+      const d4 = new Date(wk.mon); d4.setDate(d4.getDate() + wk.days.length - 1); // last listed day (Fri, or Sat in champs week)
       const div = S.dividers[wk.wk];
       if (typeof wk.wk === 'number') bars.push({ label: `W${wk.wk}`, pct: `${avg ? (avg / MAX) * 100 : 4}%`, color: PHASE[wk.phase], title: avg ? `~${avg.toLocaleString()} yds avg` : '' });
       return {
