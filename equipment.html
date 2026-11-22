@@ -1,263 +1,161 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Equipment — Vista del Lago Eagles Swim</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --deep: #05091a;
-    --silver: #a8b8cc;
-    --silver-light: #d0dce8;
-    --white: #f4f8ff;
-    --muted: #7a9abf;
-    --accent: #c8d8ec;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--deep); color:var(--white); font-family:'DM Sans',sans-serif; overflow-x:hidden; min-height:100vh; display:flex; flex-direction:column; }
-
-  body::before {
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:
-      radial-gradient(ellipse 80% 50% at 20% 80%, rgba(13,31,74,.45) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(168,184,204,.05) 0%, transparent 55%),
-      linear-gradient(180deg,#05091a 0%,#0b1535 50%,#05091a 100%);
-  }
-  body::after {
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background-image:repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(168,184,204,.03) 58px,rgba(168,184,204,.03) 60px);
-  }
-
-  /* TOP NAV */
-  .topnav { position:relative; z-index:20; display:flex; justify-content:center; gap:36px; padding:18px 24px; border-bottom:1px solid rgba(168,184,204,.08); }
-  .topnav a { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--silver); text-decoration:none; padding:6px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease, opacity .2s ease; opacity:.65; }
-  .topnav a:hover { color:var(--white); opacity:1; }
-  .topnav a.active { color:var(--white); border-bottom-color:var(--silver-light); opacity:1; }
-  @media (max-width:480px) { .topnav { gap:18px; padding:14px 14px; } .topnav a { font-size:10px; letter-spacing:.2em; } }
-
-  /* HEADER */
-  header { position:relative; z-index:10; padding:72px 40px 48px; text-align:center; border-bottom:1px solid rgba(168,184,204,.1); }
-  .header-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.35em; color:var(--silver); text-transform:uppercase; opacity:.7; margin-bottom:14px; }
-  .header-eagle { font-size:32px; margin-bottom:10px; filter:drop-shadow(0 0 12px rgba(168,184,204,.35)); opacity:.9; }
-  h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(46px,9vw,86px); letter-spacing:.08em; line-height:1;
-    background:linear-gradient(135deg,var(--white) 0%,var(--silver-light) 45%,var(--silver) 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  .header-sub { font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:.18em; margin-top:14px; text-transform:uppercase; opacity:.85; }
-
-  /* MAIN */
-  main { position:relative; z-index:10; flex:1; padding:72px 32px 100px; max-width:1100px; margin:0 auto; width:100%; }
-
-  .intro { text-align:center; max-width:640px; margin:0 auto 64px; }
-  .intro-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.32em; color:var(--silver); text-transform:uppercase; opacity:.6; margin-bottom:14px; }
-  .intro-text { font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.7; color:rgba(240,246,255,.72); font-weight:300; }
-
-  /* CATEGORY SECTION */
-  .category { margin-bottom:56px; }
-  .category-header { display:flex; align-items:baseline; gap:14px; margin-bottom:22px; padding-bottom:14px; border-bottom:1px solid rgba(168,184,204,.1); }
-  .category-title {
-    font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:.1em;
-    background:linear-gradient(135deg,var(--white) 0%,var(--silver-light) 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  }
-  .category-tag {
-    font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.22em;
-    color:var(--silver); text-transform:uppercase; opacity:.55;
-    padding:3px 10px; border:1px solid rgba(168,184,204,.18); border-radius:3px;
-  }
-  .category-tag.required { color:#ffb07a; border-color:rgba(249,165,90,.3); background:rgba(123,59,0,.18); }
-  .category-tag.optional { color:#7ec8f4; border-color:rgba(126,200,244,.25); background:rgba(27,62,120,.2); }
-
-  /* ITEM GRID */
-  .item-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
-
-  .item {
-    position:relative;
-    background:linear-gradient(165deg,rgba(13,31,74,.4),rgba(8,15,40,.55));
-    border:1px solid rgba(168,184,204,.12);
-    border-radius:8px;
-    padding:18px 20px;
-    transition:transform .2s ease, border-color .2s ease, background .2s ease;
-  }
-  .item:hover {
-    transform:translateY(-2px);
-    border-color:rgba(168,184,204,.25);
-    background:linear-gradient(165deg,rgba(13,31,74,.55),rgba(8,15,40,.7));
-  }
-
-  .item-icon {
-    font-size:22px; margin-bottom:8px; opacity:.85;
-    filter:drop-shadow(0 0 8px rgba(168,184,204,.2));
-  }
-  .item-name {
-    font-family:'DM Sans',sans-serif; font-weight:600; font-size:14.5px;
-    color:var(--white); margin-bottom:4px; letter-spacing:.01em;
-  }
-  .item-detail {
-    font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:300;
-    line-height:1.55; color:rgba(240,246,255,.55);
-  }
-
-  /* NOTE BOX */
-  .note-box {
-    margin-top:56px;
-    padding:22px 26px;
-    background:rgba(255,204,102,.05);
-    border:1px solid rgba(255,204,102,.18);
-    border-radius:8px;
-  }
-  .note-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.22em; color:#ffcc66; text-transform:uppercase; margin-bottom:8px; opacity:.9; }
-  .note-text { font-family:'DM Sans',sans-serif; font-size:13.5px; line-height:1.65; color:rgba(255,225,170,.85); font-weight:300; }
-
-  /* FOOTER */
-  footer { position:relative; z-index:10; text-align:center; padding:28px; font-family:'DM Mono',monospace; font-size:9.5px; color:rgba(168,184,204,.22); letter-spacing:.18em; border-top:1px solid rgba(168,184,204,.05); }
-
-  @media (max-width:560px) {
-    header { padding:52px 24px 36px; }
-    main { padding:52px 18px 80px; }
-    .intro { margin-bottom:44px; }
-    .category { margin-bottom:44px; }
-    .category-title { font-size:26px; }
-    .item { padding:16px 16px; }
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-
-<nav class="topnav">
-  <a href="swim-season-planner_3.html">JV</a>
-  <a href="varsity.html">Varsity</a>
-  <a href="coaches.html">Coaches</a>
-  <a href="equipment.html" class="active">Equipment</a>
-</nav>
-
-<header>
-  <div class="header-label">Vista del Lago High School · Eagles Swim · 2027</div>
-  <div class="header-eagle">🦅</div>
-  <h1>Equipment</h1>
-  <div class="header-sub">What to Bring · What to Buy</div>
-</header>
-
-<main>
-  <div class="intro">
-    <div class="intro-tag">— Gear Up for the Season —</div>
-    <p class="intro-text">Everything you'll need on deck and in the water this season. Required items must be at every practice; training equipment is used for specific sets.</p>
-  </div>
-
-  <section class="category">
-    <div class="category-header">
-      <div class="category-title">Daily Essentials</div>
-      <div class="category-tag required">Required</div>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/svg+xml" href="brand/vista-eagle.svg">
+<title>Equipment — Vista del Lago Eagles Swim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./theme.js"></script>
+<script src="./ripple-bg.js"></script>
+<style>
+html,body{margin:0;padding:0;background:var(--page-base,#000);}
+body{font-family:'Geist',system-ui,sans-serif;color:rgb(var(--ink, 238,242,248));-webkit-font-smoothing:antialiased;}
+*{box-sizing:border-box;}
+a{color:#cfe0f5;text-decoration:none;}
+a:hover{color:#ffffff;}
+</style>
+</helmet>
+<div data-ripple-host="1" style="isolation:isolate;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;background:var(--page-bg, radial-gradient(55% 38% at 12% 0%, rgba(30,64,140,.32), transparent 70%), radial-gradient(45% 32% at 92% 35%, rgba(22,48,110,.22), transparent 70%), radial-gradient(55% 35% at 25% 95%, rgba(26,52,120,.2), transparent 70%), #000);background-attachment:fixed;">
+  <dc-import name="TopNav" active="Equipment" style="position:sticky;top:0;z-index:20;display:block;" hint-size="100%,62px"></dc-import>
+  <header style="position:relative;width:100%;max-width:1120px;margin:0 auto;padding:64px 24px 40px;">
+    <img src="./brand/vista-eagle-line.svg" alt="" aria-hidden="true" style="position:absolute;z-index:-1;top:-28px;right:-140px;width:min(760px,92vw);height:auto;opacity:.07;pointer-events:none;user-select:none;">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;margin-bottom:22px;">
+      <img src="./brand/vista-wordmark.svg" alt="Vista" style="height:16px;width:auto;display:block;">
+      <span aria-hidden="true" style="width:1px;height:14px;background:rgba(200,212,230,.3);"></span>
+      <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(200,212,230,.74);">Del Lago Eagles · Swim</span>
     </div>
-    <div class="item-grid">
-      <div class="item">
-        <div class="item-icon">🩱</div>
-        <div class="item-name">Practice Suit</div>
-        <div class="item-detail">A durable training suit you can wear every day. Polyester or PBT lasts longer in chlorine than nylon/lycra.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🥽</div>
-        <div class="item-name">Goggles</div>
-        <div class="item-detail">Bring two pairs in your bag — straps break. Tinted/mirrored for outdoor practices, clear for indoor.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🧢</div>
-        <div class="item-name">Swim Cap</div>
-        <div class="item-detail">Silicone caps last longer than latex. Required for anyone with hair past the shoulders.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">💧</div>
-        <div class="item-name">Water Bottle</div>
-        <div class="item-detail">Large, insulated. You'll drink more than you think — bring it on deck every set.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🛍️</div>
-        <div class="item-name">Mesh Equipment Bag</div>
-        <div class="item-detail">Lets your fins, paddles, and snorkel drain and dry between practices.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🟫</div>
-        <div class="item-name">Towel(s)</div>
-        <div class="item-detail">Bring at least one. Two is smarter — a wet one is no fun in February.</div>
-      </div>
+    <h1 style="margin:0;font-weight:300;font-size:clamp(44px,7vw,84px);letter-spacing:-.035em;line-height:1.08;padding-bottom:.04em;background:linear-gradient(180deg,#ffffff 35%,#b2bdcd);-webkit-background-clip:text;background-clip:text;color:transparent;">Equipment</h1>
+    <div aria-hidden="true" style="margin-top:28px;width:72px;height:2px;border-radius:2px;background:linear-gradient(90deg,#ffffff,#7f8da3 60%,transparent);"></div>
+  </header>
+  <main style="flex:1;width:100%;max-width:1120px;margin:0 auto;padding:16px 24px 64px;">
+    <div style="max-width:600px;margin-bottom:48px;">
+      <div style="font-size:13px;font-weight:500;color:rgba(var(--ink, 238,242,248),.7);margin-bottom:8px;">Gear Up for the Season</div>
+      <p style="margin:0;font-size:16px;line-height:1.65;color:rgba(var(--ink, 238,242,248),.65);text-wrap:pretty;">Everything you'll need on deck and in the water this season. Required items must be at every practice; training equipment is used for specific sets.</p>
     </div>
-  </section>
-
-  <section class="category">
-    <div class="category-header">
-      <div class="category-title">Training Equipment</div>
-      <div class="category-tag required">Required</div>
+    <section style="margin-bottom:48px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:20px;font-weight:500;letter-spacing:-.01em;">Daily Essentials</span>
+        <span style="font-size:11px;padding:4px 10px;border-radius:999px;background:rgba(255,176,122,0.1);border:1px solid rgba(255,176,122,0.22);color:color-mix(in oklab, #ffb07a, #000 var(--tint-dark, 0%));">Required</span>
+        <span style="flex:1;height:1px;background:rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px;">
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🩱</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Practice Suit</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">A durable training suit you can wear every day. Polyester or PBT lasts longer in chlorine than nylon/lycra.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🥽</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Goggles</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Bring two pairs in your bag — straps break. Tinted/mirrored for outdoor practices, clear for indoor.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🧢</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Swim Cap</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Silicone caps last longer than latex. Required for anyone with hair past the shoulders.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">💧</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Water Bottle</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Large, insulated. You'll drink more than you think — bring it on deck every set.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🛍️</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Mesh Equipment Bag</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Lets your fins, paddles, and snorkel drain and dry between practices.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🟫</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Towel(s)</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Bring at least one. Two is smarter — a wet one is no fun in February.</div>
+        </div>
+      </div>
+    </section>
+    <section style="margin-bottom:48px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:20px;font-weight:500;letter-spacing:-.01em;">Training Equipment</span>
+        <span style="font-size:11px;padding:4px 10px;border-radius:999px;background:rgba(255,176,122,0.1);border:1px solid rgba(255,176,122,0.22);color:color-mix(in oklab, #ffb07a, #000 var(--tint-dark, 0%));">Required</span>
+        <span style="flex:1;height:1px;background:rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px;">
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🦶</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Fins</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Short-blade training fins (Zoomers-style). Used for kick sets and stroke work.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🟦</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Kickboard</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Standard foam kickboard. The team has some, but having your own is cleaner.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🟨</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Pull Buoy</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Foam buoy held between the thighs to isolate the upper body during pull sets.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">✋</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Hand Paddles</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Strap-on plastic paddles for resistance and stroke awareness. Size: small to start.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🤿</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Front-Mount Snorkel</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Center-mounted snorkel for technique work — lets you focus on body position without breathing.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">⏱️</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Sport Watch (Optional)</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Helpful for timing intervals on your own. Not required — pace clocks are on deck.</div>
+        </div>
+      </div>
+    </section>
+    <section style="margin-bottom:48px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="font-size:20px;font-weight:500;letter-spacing:-.01em;">Meet Day</span>
+        <span style="font-size:11px;padding:4px 10px;border-radius:999px;background:rgba(126,200,244,0.1);border:1px solid rgba(126,200,244,0.22);color:color-mix(in oklab, #7ec8f4, #000 var(--tint-dark, 0%));">As Needed</span>
+        <span style="flex:1;height:1px;background:rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px;">
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🏆</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Tech Suit</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">A race-day suit for championship meets. Talk to coaches before buying — they're expensive and only worn a few times per season.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">👕</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Team Apparel</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Team t-shirt and parka for between events. Order info will go out at the start of the season.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">🥪</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Snacks &amp; Food</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">Meets are long. Bring carbs, fruit, and electrolytes. Avoid heavy meals between events.</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:20px;display:flex;flex-direction:column;gap:8px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 60%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));">
+          <div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));">📓</div>
+          <div style="font-size:15px;font-weight:500;margin-top:4px;">Sharpie</div>
+          <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">For writing your event/heat/lane on your arm. Always seems to be in short supply on deck.</div>
+        </div>
+      </div>
+    </section>
+    <div style="padding:20px 22px;border-radius:20px;background:var(--frost, none), linear-gradient(rgba(255,204,102,.07), rgba(255,204,102,.07));border:1px solid rgba(255,204,102,.16);backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));">
+      <div style="font-size:13px;font-weight:500;color:color-mix(in oklab, #ffd37a, #000 var(--tint-dark, 0%));margin-bottom:6px;">Before You Buy</div>
+      <div style="font-size:14px;line-height:1.6;color:color-mix(in oklab, rgba(255,228,170,.9), #000 var(--tint-dark, 0%));text-wrap:pretty;">This is a starting list — exact requirements and recommended brands will be confirmed at the team meeting. Don't rush out and buy everything before then. If cost is a concern, talk to a coach: the team has loaner equipment for athletes who need it.</div>
     </div>
-    <div class="item-grid">
-      <div class="item">
-        <div class="item-icon">🦶</div>
-        <div class="item-name">Fins</div>
-        <div class="item-detail">Short-blade training fins (Zoomers-style). Used for kick sets and stroke work.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🟦</div>
-        <div class="item-name">Kickboard</div>
-        <div class="item-detail">Standard foam kickboard. The team has some, but having your own is cleaner.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🟨</div>
-        <div class="item-name">Pull Buoy</div>
-        <div class="item-detail">Foam buoy held between the thighs to isolate the upper body during pull sets.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">✋</div>
-        <div class="item-name">Hand Paddles</div>
-        <div class="item-detail">Strap-on plastic paddles for resistance and stroke awareness. Size: small to start.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🤿</div>
-        <div class="item-name">Front-Mount Snorkel</div>
-        <div class="item-detail">Center-mounted snorkel for technique work — lets you focus on body position without breathing.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">⏱️</div>
-        <div class="item-name">Sport Watch (Optional)</div>
-        <div class="item-detail">Helpful for timing intervals on your own. Not required — pace clocks are on deck.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="category">
-    <div class="category-header">
-      <div class="category-title">Meet Day</div>
-      <div class="category-tag optional">As Needed</div>
-    </div>
-    <div class="item-grid">
-      <div class="item">
-        <div class="item-icon">🏆</div>
-        <div class="item-name">Tech Suit</div>
-        <div class="item-detail">A race-day suit for championship meets. Talk to coaches before buying — they're expensive and only worn a few times per season.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">👕</div>
-        <div class="item-name">Team Apparel</div>
-        <div class="item-detail">Team t-shirt and parka for between events. Order info will go out at the start of the season.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">🥪</div>
-        <div class="item-name">Snacks & Food</div>
-        <div class="item-detail">Meets are long. Bring carbs, fruit, and electrolytes. Avoid heavy meals between events.</div>
-      </div>
-      <div class="item">
-        <div class="item-icon">📓</div>
-        <div class="item-name">Sharpie</div>
-        <div class="item-detail">For writing your event/heat/lane on your arm. Always seems to be in short supply on deck.</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="note-box">
-    <div class="note-label">⚠ Before You Buy</div>
-    <div class="note-text">This is a starting list — exact requirements and recommended brands will be confirmed at the team meeting. Don't rush out and buy everything before then. If cost is a concern, talk to a coach: the team has loaner equipment for athletes who need it.</div>
-  </div>
-</main>
-
-<footer>VISTA DEL LAGO EAGLES &nbsp;·&nbsp; SWIM TEAM &nbsp;·&nbsp; 2027 SEASON</footer>
-
+  </main>
+  <footer style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:48px 24px 44px;margin-top:8px;border-top:1px solid rgba(var(--glass-rgb, 255,255,255),.06);">
+    <img src="./brand/vista-logo.svg" alt="Vista Eagles" style="width:132px;height:auto;display:block;filter:drop-shadow(0 8px 28px rgba(0,32,78,.9));">
+    <div style="text-align:center;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,212,230,.62);">Vista del Lago Eagles · Swim Team · 2027 Season</div>
+  </footer>
+</div>
+</x-dc>
 </body>
 </html>

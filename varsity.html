@@ -1,703 +1,306 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vista del Lago Eagles — Varsity Swim 2027</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --deep: #05091a;
-    --silver: #a8b8cc;
-    --silver-light: #d0dce8;
-    --white: #f4f8ff;
-    --muted: #7a9abf;
-    --accent: #c8d8ec;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--deep); color:var(--white); font-family:'DM Sans',sans-serif; overflow-x:hidden; }
-
-  body::before {
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background:
-      radial-gradient(ellipse 80% 50% at 20% 80%, rgba(13,31,74,.55) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(168,184,204,.06) 0%, transparent 55%),
-      linear-gradient(180deg,#05091a 0%,#0b1535 50%,#05091a 100%);
-  }
-  body::after {
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-    background-image:repeating-linear-gradient(0deg,transparent,transparent 58px,rgba(168,184,204,.04) 58px,rgba(168,184,204,.04) 60px);
-  }
-
-  /* TOP NAV */
-  .topnav { position:relative; z-index:20; display:flex; justify-content:center; gap:36px; padding:18px 24px; border-bottom:1px solid rgba(168,184,204,.08); }
-  .topnav a { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--silver); text-decoration:none; padding:6px 2px; border-bottom:1px solid transparent; transition:color .2s ease, border-color .2s ease, opacity .2s ease; opacity:.65; }
-  .topnav a:hover { color:var(--white); opacity:1; }
-  .topnav a.active { color:var(--white); border-bottom-color:var(--silver-light); opacity:1; }
-  @media (max-width:480px) { .topnav { gap:22px; padding:14px 16px; } .topnav a { font-size:10px; letter-spacing:.22em; } }
-
-  /* HEADER */
-  header { position:relative; z-index:10; padding:56px 40px 36px; text-align:center; border-bottom:1px solid rgba(168,184,204,.15); }
-  .header-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.35em; color:var(--silver); text-transform:uppercase; opacity:.7; margin-bottom:10px; }
-  .header-eagle { font-size:34px; margin-bottom:8px; filter:drop-shadow(0 0 12px rgba(168,184,204,.4)); }
-  h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,8vw,78px); letter-spacing:.06em; line-height:.95;
-    background:linear-gradient(135deg,var(--white) 0%,var(--silver-light) 40%,var(--silver) 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-  h1 .sub { display:block; font-size:clamp(24px,4.5vw,48px); letter-spacing:.12em;
-    background:linear-gradient(135deg,var(--silver) 0%,var(--accent) 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; opacity:.85; }
-  .header-sub { font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:.1em; margin-top:12px; }
-
-  /* LEGEND */
-  .legend { position:relative; z-index:10; display:flex; flex-wrap:wrap; gap:9px; justify-content:center; padding:18px 32px; border-bottom:1px solid rgba(168,184,204,.08); }
-  .li { display:flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:.07em; color:var(--muted); text-transform:uppercase; }
-  .ld { width:9px; height:9px; border-radius:2px; flex-shrink:0; }
-
-  /* SEASON */
-  .season { position:relative; z-index:10; padding:36px 20px 50px; max-width:1160px; margin:0 auto; }
-
-  /* PHASE DIVIDER */
-  .phase-div { display:flex; align-items:center; gap:14px; margin:32px 0 12px; padding-left:4px; }
-  .phase-div-line { flex:1; height:1px; background:linear-gradient(90deg,rgba(168,184,204,.22),transparent); }
-  .phase-div-label { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:.22em; }
-  .pd-tech   { color:#7ec8f4; }
-  .pd-build  { color:#5ce6a0; }
-  .pd-refine { color:#f9a55a; }
-  .pd-taper  { color:#ffb07a; }
-  .pd-post   { color:#c8b0f0; }
-
-  /* WEEK */
-  .week-block { margin-bottom:7px; animation:fadeUp .45s ease both; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-  .week-hdr { display:flex; align-items:center; gap:10px; margin-bottom:4px; padding-left:4px; }
-  .wk-lbl { font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:.12em; color:rgba(240,246,255,.28); min-width:55px; }
-  .wk-dates { font-family:'DM Mono',monospace; font-size:9.5px; color:rgba(168,184,204,.45); letter-spacing:.05em; }
-  .wk-badge { font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:.13em; text-transform:uppercase; padding:2px 7px; border-radius:3px; font-weight:500; }
-  .ph-tryout { background:rgba(20,40,90,.6);  color:#b8cce8; border:1px solid rgba(168,184,204,.4); }
-  .ph-tech   { background:rgba(27,62,120,.5); color:#7ec8f4; border:1px solid rgba(126,200,244,.25); }
-  .ph-build  { background:rgba(26,107,74,.4); color:#5ce6a0; border:1px solid rgba(92,230,160,.25); }
-  .ph-refine { background:rgba(123,59,0,.5);  color:#f9a55a; border:1px solid rgba(249,165,90,.25); }
-  .ph-taper  { background:rgba(100,25,10,.5); color:#ffb07a; border:1px solid rgba(255,150,80,.3); }
-  .ph-post   { background:rgba(50,20,90,.5);  color:#c8b0f0; border:1px solid rgba(180,140,240,.3); }
-  .wk-yds { font-family:'DM Mono',monospace; font-size:9.5px; color:var(--muted); margin-left:auto; padding-right:4px; opacity:.65; }
-
-  /* DAYS GRID — 5 cols */
-  .days-row { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; }
-
-  /* DAY CARD */
-  .day-card { border-radius:6px; padding:10px 9px; min-height:108px; position:relative; overflow:hidden; transition:transform .14s ease,box-shadow .14s ease; cursor:pointer; }
-  .day-card:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(0,0,0,.45); z-index:5; }
-  .day-card:hover::after { content:'view workout →'; position:absolute; bottom:6px; right:8px; font-family:'DM Mono',monospace; font-size:7.5px; letter-spacing:.1em; color:rgba(240,246,255,.45); text-transform:uppercase; }
-  .day-card.c-off:hover::after, .day-card.c-bye:hover::after { content:''; }
-  .day-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; }
-
-  .c-tryout    { background:linear-gradient(145deg,rgba(8,15,40,.97),rgba(20,35,80,.93));   border:1px solid rgba(168,184,204,.4); }
-  .c-tryout::before { background:linear-gradient(90deg,var(--silver-light),transparent); }
-  .c-tech      { background:linear-gradient(145deg,rgba(13,31,74,.95),rgba(26,50,112,.9));  border:1px solid rgba(168,184,204,.18); }
-  .c-tech::before { background:linear-gradient(90deg,#4a9fd4,transparent); }
-  .c-build     { background:linear-gradient(145deg,rgba(10,55,36,.9),rgba(18,90,55,.85));   border:1px solid rgba(92,230,160,.18); }
-  .c-build::before { background:linear-gradient(90deg,#2ea870,transparent); }
-  .c-refine    { background:linear-gradient(145deg,rgba(70,30,5,.9),rgba(110,50,10,.85));   border:1px solid rgba(249,165,90,.18); }
-  .c-refine::before { background:linear-gradient(90deg,#f9803a,transparent); }
-  .c-taper     { background:linear-gradient(145deg,rgba(40,10,10,.9),rgba(70,15,15,.88));   border:1px solid rgba(255,160,100,.25); }
-  .c-taper::before { background:linear-gradient(90deg,#ffaa55,transparent); }
-  .c-ff        { background:linear-gradient(145deg,rgba(18,48,90,.95),rgba(26,68,120,.9));  border:1px solid rgba(168,184,204,.35); }
-  .c-ff::before { background:linear-gradient(90deg,var(--silver-light),transparent); }
-  .c-meet      { background:linear-gradient(145deg,rgba(80,10,35,.95),rgba(130,20,55,.9));  border:1px solid rgba(255,80,120,.3); }
-  .c-meet::before { background:linear-gradient(90deg,#ff507a,transparent); }
-  .c-champs    { background:linear-gradient(145deg,rgba(30,10,80,.95),rgba(58,26,122,.9));  border:1px solid rgba(168,184,204,.5); }
-  .c-champs::before { background:linear-gradient(90deg,var(--silver-light),transparent); }
-  .c-bprac     { background:linear-gradient(145deg,rgba(8,25,60,.9),rgba(15,45,95,.85));    border:1px solid rgba(168,184,204,.15); }
-  .c-bprac::before { background:linear-gradient(90deg,rgba(168,184,204,.4),transparent); }
-  .c-bye       { background:rgba(18,22,38,.8); border:1px dashed rgba(255,255,255,.1); }
-  .c-off       { background:rgba(10,14,28,.5); border:1px solid rgba(255,255,255,.04); }
-  .c-secprac   { background:linear-gradient(145deg,rgba(35,10,60,.9),rgba(58,18,90,.85));   border:1px solid rgba(160,100,220,.25); }
-  .c-secprac::before { background:linear-gradient(90deg,#a060e0,transparent); }
-  .c-sections  { background:linear-gradient(145deg,rgba(45,10,75,.95),rgba(75,20,110,.9));  border:1px solid rgba(180,140,240,.3); }
-  .c-sections::before { background:linear-gradient(90deg,#c060ff,transparent); }
-  .c-state     { background:linear-gradient(145deg,rgba(60,10,10,.95),rgba(100,15,15,.9));  border:1px solid rgba(255,100,100,.3); }
-  .c-state::before { background:linear-gradient(90deg,#ff6060,transparent); }
-  .c-banquet   { background:linear-gradient(145deg,rgba(10,40,15,.95),rgba(20,70,25,.9));   border:1px solid rgba(100,240,120,.3); }
-  .c-banquet::before { background:linear-gradient(90deg,#60e870,transparent); }
-
-  .day-name  { font-family:'DM Mono',monospace; font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; color:rgba(240,246,255,.36); margin-bottom:2px; }
-  .day-date  { font-family:'DM Mono',monospace; font-size:9px; color:rgba(168,184,204,.42); margin-bottom:5px; letter-spacing:.03em; }
-  .day-title { font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; line-height:1.3; color:var(--white); margin-bottom:3px; }
-  .day-detail{ font-family:'DM Sans',sans-serif; font-size:10px; font-weight:300; color:rgba(240,246,255,.5); line-height:1.4; }
-  .c-off .day-title,.c-off .day-detail { color:rgba(240,246,255,.15); }
-  .yds-tag  { display:inline-block; font-family:'DM Mono',monospace; font-size:8.5px; color:var(--silver); opacity:.52; margin-top:4px; }
-  .note-tag { display:inline-block; font-family:'DM Mono',monospace; font-size:8px; color:#ffcc66; opacity:.72; margin-top:4px; letter-spacing:.02em; }
-
-  /* YARDAGE BAR */
-  .bar-section { position:relative; z-index:10; padding:0 20px 55px; max-width:1160px; margin:0 auto; }
-  .bar-title { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:.12em; color:rgba(240,246,255,.32); margin-bottom:12px; }
-  .bar-wrap { display:flex; align-items:flex-end; gap:5px; height:72px; }
-  .bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; height:100%; justify-content:flex-end; }
-  .bar-fill { width:100%; border-radius:3px 3px 0 0; min-height:3px; }
-  .bar-lbl { font-family:'DM Mono',monospace; font-size:8px; color:var(--muted); }
-
-  footer { position:relative; z-index:10; text-align:center; padding:26px; font-family:'DM Mono',monospace; font-size:9.5px; color:rgba(168,184,204,.18); letter-spacing:.15em; border-top:1px solid rgba(168,184,204,.05); }
-
-  /* MODAL */
-  .modal-overlay {
-    position:fixed; inset:0; z-index:1000;
-    background:rgba(5,9,26,.82); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-    display:none; align-items:flex-start; justify-content:center;
-    padding:60px 18px 40px; overflow-y:auto;
-    animation:overlayIn .2s ease;
-  }
-  .modal-overlay.open { display:flex; }
-  @keyframes overlayIn { from{opacity:0} to{opacity:1} }
-
-  .modal {
-    background:linear-gradient(165deg,rgba(13,31,74,.97),rgba(8,15,40,.97));
-    border:1px solid rgba(168,184,204,.22);
-    border-radius:12px; padding:30px 30px 26px;
-    max-width:640px; width:100%; position:relative;
-    box-shadow:0 24px 60px rgba(0,0,0,.6);
-    animation:modalIn .25s cubic-bezier(.2,.8,.2,1);
-  }
-  @keyframes modalIn { from{opacity:0; transform:translateY(20px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)} }
-
-  .modal-close {
-    position:absolute; top:12px; right:14px;
-    background:none; border:none; color:var(--silver);
-    font-size:26px; cursor:pointer; opacity:.5;
-    width:34px; height:34px; line-height:1;
-    border-radius:5px; transition:all .15s; padding:0;
-  }
-  .modal-close:hover { opacity:1; background:rgba(168,184,204,.1); }
-
-  .modal-day-name { font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:.28em; color:var(--silver); text-transform:uppercase; opacity:.65; margin-bottom:4px; }
-  .modal-day-date { font-family:'DM Mono',monospace; font-size:11px; color:rgba(168,184,204,.5); margin-bottom:14px; letter-spacing:.05em; }
-  .modal-title {
-    font-family:'Bebas Neue',sans-serif; font-size:34px; letter-spacing:.05em; line-height:1.05;
-    background:linear-gradient(135deg,var(--white) 0%,var(--silver-light) 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-    margin-bottom:8px;
-  }
-  .modal-subtitle { font-family:'DM Sans',sans-serif; font-size:13px; color:rgba(240,246,255,.62); line-height:1.55; margin-bottom:24px; }
-
-  .modal-section { margin-bottom:20px; padding:0 0 0 14px; border-left:2px solid rgba(168,184,204,.16); }
-  .modal-section-header { display:flex; align-items:baseline; gap:10px; margin-bottom:8px; }
-  .modal-section-label { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:.2em; }
-  .ms-warmup   { color:#7ec8f4; }
-  .ms-main     { color:#5ce6a0; }
-  .ms-cooldown { color:#c8b0f0; }
-  .ms-activity { color:#ffb07a; }
-  .modal-section-yards { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); opacity:.7; letter-spacing:.05em; }
-
-  .modal-section ul { list-style:none; padding:0; margin:0; }
-  .modal-section li {
-    font-family:'DM Sans',sans-serif; font-size:13.5px; line-height:1.6;
-    color:rgba(240,246,255,.85); padding:3px 0 3px 16px; position:relative;
-  }
-  .modal-section li::before {
-    content:'›'; position:absolute; left:0; top:3px;
-    color:var(--silver); opacity:.45; font-size:14px;
-  }
-
-  .modal-notes {
-    font-family:'DM Sans',sans-serif; font-size:13px;
-    color:rgba(255,204,102,.9); line-height:1.6;
-    padding:12px 14px; margin-top:6px;
-    background:rgba(255,204,102,.05); border-radius:6px;
-    border:1px solid rgba(255,204,102,.18);
-  }
-  .modal-notes-label { display:block; font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:.18em; color:#ffcc66; opacity:.85; text-transform:uppercase; margin-bottom:5px; }
-
-  .modal-total {
-    font-family:'DM Mono',monospace; font-size:11px; color:var(--silver);
-    margin-top:18px; padding-top:14px;
-    border-top:1px solid rgba(168,184,204,.12);
-    display:flex; justify-content:space-between; opacity:.75; letter-spacing:.08em;
-  }
-
-  .modal-empty { font-family:'DM Sans',sans-serif; font-size:14px; color:rgba(168,184,204,.7); text-align:center; padding:24px 12px 6px; line-height:1.65; }
-  .modal-empty-icon { font-size:36px; margin-bottom:10px; opacity:.7; }
-
-  @media (max-width:520px) {
-    .modal { padding:24px 20px 22px; }
-    .modal-title { font-size:28px; }
-    .modal-section { padding-left:12px; }
-    .modal-section li { font-size:13px; }
-  }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="icon" type="image/svg+xml" href="brand/vista-eagle.svg">
+<title>Vista del Lago Eagles — Varsity Swim 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./season-data.js"></script>
+<script src="./theme.js"></script>
+<script src="./ripple-bg.js"></script>
+<style>
+html,body{margin:0;padding:0;background:var(--page-base,#000);}
+body{font-family:'Geist',system-ui,sans-serif;color:rgb(var(--ink, 238,242,248));-webkit-font-smoothing:antialiased;}
+*{box-sizing:border-box;}
+a{color:#cfe0f5;text-decoration:none;}
+a:hover{color:#ffffff;}
+</style>
+</helmet>
+<div data-ripple-host="1" style="isolation:isolate;min-height:100vh;position:relative;overflow-x:hidden;background:var(--page-bg, radial-gradient(55% 38% at 12% 0%, rgba(30,64,140,.32), transparent 70%), radial-gradient(45% 32% at 92% 35%, rgba(22,48,110,.22), transparent 70%), radial-gradient(55% 35% at 25% 95%, rgba(26,52,120,.2), transparent 70%), #000);background-attachment:fixed;">
+  <dc-import name="TopNav" active="Varsity" style="position:sticky;top:0;z-index:20;display:block;" hint-size="100%,62px"></dc-import>
 
-<nav class="topnav">
-  <a href="swim-season-planner_3.html">JV</a>
-  <a href="varsity.html" class="active">Varsity</a>
-  <a href="coaches.html">Coaches</a>
-  <a href="equipment.html">Equipment</a>
-</nav>
-
-<header>
-  <div class="header-label">Vista del Lago High School · Varsity Swimming · 2027</div>
-  <div class="header-eagle">🦅</div>
-  <h1>Season Plan<span class="sub">Eagles Swim</span></h1>
-  <div class="header-sub">Feb 8 – May 17, 2027 &nbsp;·&nbsp; Mon – Fri &nbsp;·&nbsp; 11 Season Weeks + Post-Season</div>
-</header>
-
-<div class="legend">
-  <div class="li"><div class="ld" style="background:#0c1e50;border:1px solid rgba(168,184,204,.55)"></div>Tryout</div>
-  <div class="li"><div class="ld" style="background:#1b3e78;border:1px solid rgba(126,200,244,.35)"></div>Technique</div>
-  <div class="li"><div class="ld" style="background:#1a6b4a;border:1px solid rgba(92,230,160,.35)"></div>Build</div>
-  <div class="li"><div class="ld" style="background:#7b3b00;border:1px solid rgba(249,165,90,.35)"></div>Refine</div>
-  <div class="li"><div class="ld" style="background:#461010;border:1px solid rgba(255,160,100,.35)"></div>Taper</div>
-  <div class="li"><div class="ld" style="background:#12305a;border:1px solid rgba(168,184,204,.45)"></div>🎉 Fun Friday</div>
-  <div class="li"><div class="ld" style="background:#8b1a3b;border:1px solid rgba(255,80,120,.35)"></div>Dual Meet</div>
-  <div class="li"><div class="ld" style="background:#3a1a7a;border:1px solid rgba(168,184,204,.55)"></div>League Champs</div>
-  <div class="li"><div class="ld" style="background:#0d2255;border:1px solid rgba(168,184,204,.2)"></div>Spring Break Practice</div>
-  <div class="li"><div class="ld" style="background:#2d1060;border:1px solid rgba(180,140,240,.35)"></div>Sections</div>
-  <div class="li"><div class="ld" style="background:#3c0a0a;border:1px solid rgba(255,100,100,.35)"></div>State Meet</div>
-  <div class="li"><div class="ld" style="background:#0a3010;border:1px solid rgba(100,240,120,.35)"></div>Banquet</div>
-</div>
-
-<div class="season" id="season"></div>
-
-<div class="bar-section">
-  <div class="bar-title">Season Yardage Arc</div>
-  <div class="bar-wrap" id="yardBar"></div>
-</div>
-
-<footer>VISTA DEL LAGO EAGLES &nbsp;·&nbsp; VARSITY SWIM &nbsp;·&nbsp; 2027 SEASON PLANNER</footer>
-
-<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal" id="modalContent"></div>
-</div>
-
-<script>
-function fmt(d) {
-  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-}
-function monOf(wk) { // week 1 = Feb 8 2027 (first allowable practice date)
-  const d = new Date(2027,1,8);
-  d.setDate(d.getDate() + (wk-1)*7);
-  return d;
-}
-function weekDates(mon) {
-  return [0,1,2,3,4].map(i=>{ const d=new Date(mon); d.setDate(d.getDate()+i); return fmt(d); });
-}
-
-const DAYS = ['MON','TUE','WED','THU','FRI'];
-
-// type → CSS class
-const TYPE_CLASS = {
-  tryout:'c-tryout', tech:'c-tech', build:'c-build', refine:'c-refine',
-  taper:'c-taper', ff:'c-ff', meet:'c-meet', champs:'c-champs',
-  bprac:'c-bprac', bye:'c-bye', off:'c-off',
-  secprac:'c-secprac', sections:'c-sections', state:'c-state', banquet:'c-banquet',
-};
-
-const PHASE_CLASS = {
-  tryout:'ph-tryout', tech:'ph-tech', build:'ph-build',
-  refine:'ph-refine', taper:'ph-taper', post:'ph-post',
-};
-
-const BAR_COLOR = {
-  tryout:'#3a5a9a', tech:'#2255a8', build:'#1a9b5e',
-  refine:'#d4691a', taper:'#c04a1a',
-};
-
-// ── WEEK DATA ────────────────────────────────────────────
-// yardage: Mon–Fri (null = no practice or meet day)
-// Fun Friday yardage: ~1000 (warmup) + small set ≈ 1400
-const weeks = [
-  // WEEK 1 — Feb 1–5 — Tryout + Technique
-  { wk:1, phase:'tryout', badge:'Tryout / Technique', mon:monOf(1),
-    yds:[2000,2100,2100,2200,1400],
-    days:[
-      {t:'tryout', title:'Tryout Day 1',        detail:'Timed 200 IM, kick evaluation, stroke observation',
-        workout:{
-          warmup:{distance:500, sets:['200 swim choice (smooth)','4×50 kick on board (any stroke) @ :15 rest','100 IM drill — 25 of each stroke']},
-          mainSet:{distance:1300, sets:['1×200 IM TIMED — your placement swim, all out','200 easy between','4×100 kick (one of each stroke) @ 2:00','8×50 stroke observation (coach watches each) @ 1:00']},
-          cooldown:{distance:200, sets:['200 easy swim choice — long & loose']},
-          notes:'Bring a water bottle and goggles. Be on deck 10 min early. Don\'t worry about times — just show us your strokes!'
-        }
-      },
-      {t:'tryout', title:'Tryout Day 2',        detail:'Sprint eval: 100 each stroke, relay audition',
-        workout:{
-          warmup:{distance:500, sets:['300 swim','4×50 build by 25 @ 1:00']},
-          mainSet:{distance:1300, sets:['1×100 fly all out @ 4:00','1×100 back all out @ 4:00','1×100 breast all out @ 4:00','1×100 free all out @ 3:00','Relay audition: 4×50 free FROM A DIVE @ 2:00','200 easy between rounds']},
-          cooldown:{distance:300, sets:['300 easy — alternate 25 back / 25 free']},
-          notes:'Practice your dives in the warmup. Sprint days are about effort — leave nothing in the tank.'
-        }
-      },
-      {t:'tryout', title:'Tryout Day 3',        detail:'Distance eval: 500 free, endurance threshold set',
-        workout:{
-          warmup:{distance:500, sets:['200 swim','100 IM drill','4×50 kick @ :15 rest']},
-          mainSet:{distance:1400, sets:['1×500 free TIMED — pace yourself!','5 min easy walk-around','6×100 free @ 1:40 — hold a strong, even pace','100 easy between']},
-          cooldown:{distance:200, sets:['200 easy backstroke / free mix']},
-          notes:'The 500 is a pace test. Don\'t blast the first 100 — find a rhythm you can hold for the whole swim.'
-        }
-      },
-      {t:'tryout', title:'Tryout Day 4 — Cuts', detail:'Final assessment, IM & event assignments, roster posted',
-        workout:{
-          warmup:{distance:500, sets:['300 swim','4×50 IM drill @ 1:00']},
-          mainSet:{distance:1500, sets:['4×50 dive starts (one of each stroke) @ 1:30','1×200 of YOUR top event at race pace @ 4:00','8×100 mixed stroke at moderate effort @ 1:45','4×50 turn practice (open & flip) @ 1:00']},
-          cooldown:{distance:200, sets:['200 easy swim — shake it out']},
-          notes:'Roster will be posted today after practice. Whatever happens, keep your head up — we\'re proud of every one of you for showing up. 🦅'
-        }
-      },
-      {t:'ff',     title:'🎉 Fun Friday',       detail:'Meet warmup 1000 · quick kick set · welcome team relay',
-        workout:{
-          warmup:{distance:1000, sets:['400 swim — long & loose','200 kick (board)','4×50 drill @ 1:00','4×25 build @ :45']},
-          mainSet:{distance:400, sets:['Welcome team relay! 4×50 free, mixed teams','Best 3 of 5 races wins bragging rights']},
-          notes:'Wear team colors if you have them. Bring a friend who\'s curious about swim — first Friday is open invite. Pizza after at the picnic tables! 🍕'
-        }
-      },
-    ]},
-
-  // WEEK 2 — Feb 15–19 — Technique  (Presidents' Day Feb 15 = no practice)
-  { wk:2, phase:'tech', badge:'Technique Phase', mon:monOf(2),
-    yds:[null,2600,2700,2700,1400],
-    days:[
-      {t:'off',  title:"Presidents' Day",    detail:'No practice — school holiday'},
-      {t:'tech', title:'Butterfly Focus',    detail:'Two-kick cycle, undulation, breathing pattern'},
-      {t:'tech', title:'IM Transitions',     detail:'Legal turns by stroke, IM order, combo sets'},
-      {t:'tech', title:'Starts & Exchanges', detail:'Block starts, flip & touch turns, relay handoffs'},
-      {t:'ff',   title:'🎉 Fun Friday',      detail:'Meet warmup 1000 · stroke drill circuit · blind swim game'},
-    ]},
-
-  // WEEK 3 — Feb 22–26 — Technique (full week)
-  { wk:3, phase:'tech', badge:'Technique Phase', mon:monOf(3),
-    yds:[2400,2500,2500,2500,1400],
-    days:[
-      {t:'tech', title:'Body Position',     detail:'Streamline, balance drills, kick board sets',
-        workout:{
-          warmup:{distance:600, sets:['200 swim choice','200 kick (50 board / 50 streamline alternate)','4×50 IM by 25 — drill / swim @ 1:00']},
-          mainSet:{distance:1500, sets:['8×50 streamline kick OFF THE WALL — count strokes! @ 1:00','4×100 catch-up free @ 1:45 — focus: high hips','6×75 (25 drill / 25 swim / 25 build) @ 1:30','4×50 balance kick on side @ 1:15 — eyes down']},
-          cooldown:{distance:300, sets:['300 easy free — breathe every 5']},
-          notes:'Today is all about how you SIT in the water. Smaller splash, longer body, no bobbing. Imagine a string pulling your head forward.'
-        }
-      },
-      {t:'tech', title:'Freestyle Catch',   detail:'Early vertical forearm, catch-up drill, EVF paddles',
-        workout:{
-          warmup:{distance:600, sets:['300 swim','200 kick','4×25 build @ :40']},
-          mainSet:{distance:1600, sets:['8×50 catch-up free @ 1:00 — pause at full extension','6×100 EVF drill / swim by 50 @ 1:45','4×50 fingertip drag @ 1:00','8×50 with paddles — focus: early catch @ 1:00']},
-          cooldown:{distance:300, sets:['300 easy backstroke / free pattern']},
-          notes:'The "catch" happens BEFORE the pull. Get the elbow up high and early. Don\'t just yank water — anchor and pull yourself past it.'
-        }
-      },
-      {t:'tech', title:'Backstroke Focus',  detail:'Rotation, entry angle, high-elbow pull pattern',
-        workout:{
-          warmup:{distance:600, sets:['200 swim','4×100 IM @ 2:00','200 back kick']},
-          mainSet:{distance:1600, sets:['8×50 backstroke @ 1:00 — count strokes, drop one each round','6×100 back drill / swim by 25 @ 2:00 (single arm, double arm, swim, swim)','4×75 back kick on back @ 1:30 — head still!','8×50 back from a flip turn @ 1:00']},
-          cooldown:{distance:300, sets:['300 easy choice']},
-          notes:'Eyes up at the ceiling. Hips drive rotation, not shoulders. If you\'re looking at your toes, your head is too high.'
-        }
-      },
-      {t:'tech', title:'Breaststroke Focus',detail:'Pullout mechanics, narrow kick, tight timing',
-        workout:{
-          warmup:{distance:600, sets:['300 swim','200 IM drill','100 breast pullouts only']},
-          mainSet:{distance:1600, sets:['8×50 breast PULL only — no kick! @ 1:15','6×50 breast kick on board @ 1:15','4×100 breast — descend 1→4 @ 2:15','8×25 breast pullouts only @ :40','4×75 breast (25 drill / 50 swim) @ 1:45']},
-          cooldown:{distance:300, sets:['300 easy free / back alternate']},
-          notes:'Narrow kick! Toes flexed and feet OUTSIDE the knees on the recovery. One pull, one kick, one glide — count it out.'
-        }
-      },
-      {t:'ff',   title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · pull set · underwater distance contest',
-        workout:{
-          warmup:{distance:1000, sets:['400 swim','200 kick','200 pull','4×25 build @ :40','100 easy']},
-          mainSet:{distance:400, sets:['4×100 with paddles & buoy — easy effort @ 2:00']},
-          notes:'After the set: UNDERWATER DISTANCE CONTEST. Streamline only, no kicks past the flags. Longest distance wins. Lung capacity day — go for it! 🫁'
-        }
-      },
-    ]},
-
-  // WEEK 4 — Mar 1–5 — Build  Meet 1
-  { wk:4, phase:'build', badge:'Build Phase', mon:monOf(4),
-    yds:[2900,3000,null,3100,1400],
-    days:[
-      {t:'build', title:'Aerobic Base',    detail:'200s & 400s at easy cruise pace, stroke count focus'},
-      {t:'build', title:'Pre-Meet Tune',   detail:'Race-pace 50s, start reps, event visualization'},
-      {t:'meet',  title:'🏊 DUAL MEET 1', detail:'Home meet — first race of the season!'},
-      {t:'build', title:'Recovery Swim',   detail:'Easy 200s, drill sets, kick focus'},
-      {t:'ff',    title:'🎉 Fun Friday',   detail:'Meet warmup 1000 · threshold 50s · noodle relay battle'},
-    ]},
-
-  // WEEK 5 — Mar 8–12 — Build  Meet 2
-  { wk:5, phase:'build', badge:'Build Phase', mon:monOf(5),
-    yds:[3200,3200,null,3300,1400],
-    days:[
-      {t:'build', title:'Threshold Ladders', detail:'100→200→400→200→100 at CSS pace'},
-      {t:'build', title:'Pre-Meet Sharpener',detail:'8×50 at goal pace, relay exchange practice'},
-      {t:'meet',  title:'🏊 DUAL MEET 2',   detail:'Away meet — execution & split focus'},
-      {t:'build', title:'Active Recovery',   detail:'Drill & kick sets, loosen post-meet'},
-      {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · pull set · partner towing race'},
-    ]},
-
-  // WEEK 6 — Mar 15–19 — Build  Bye
-  { wk:6, phase:'build', badge:'Build Phase', mon:monOf(6),
-    yds:[3400,3400,3300,3500,1400],
-    days:[
-      {t:'build', title:'Broken Swims',      detail:'Broken 200s with :10 rest at goal pace'},
-      {t:'build', title:'Kick & Pull Focus', detail:'Board sets, pull buoy, lactate threshold work'},
-      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
-      {t:'build', title:'Negative Split Sets',detail:'Back-half faster, descend 100s, pace control'},
-      {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · 200 IM time trial · costume swim'},
-    ]},
-
-  // WEEK 7 — Mar 22–26 — Build  Meet 3  (PEAK)
-  { wk:7, phase:'build', badge:'Build Phase', mon:monOf(7),
-    yds:[3600,3700,null,4000,1400],
-    days:[
-      {t:'build', title:'Race Simulation',   detail:'Full event swims at race pace, timed trials'},
-      {t:'build', title:'Pre-Meet Sharpener',detail:'Fast 50s, relay handoffs, mental prep'},
-      {t:'meet',  title:'🏊 DUAL MEET 3',   detail:'Big rival meet — season benchmark'},
-      {t:'build', title:'Peak Yardage Day',  detail:'Season-high 4000 yds — long aerobic sets'},
-      {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · speed 25s · diving rings game'},
-    ]},
-
-  // WEEK 8 — Mar 29–Apr 2 — Refine  Meet 4
-  { wk:8, phase:'refine', badge:'Refine Phase', mon:monOf(8),
-    yds:[3200,3100,null,3000,1400],
-    days:[
-      {t:'refine', title:'Descend to Race Pace', detail:'Volume drops, intensity climbs — event specificity'},
-      {t:'refine', title:'Event-Specific Sets',  detail:'Each swimmer trains primary event at goal pace'},
-      {t:'meet',   title:'🏊 DUAL MEET 4',      detail:'Home meet — execute the race plan'},
-      {t:'refine', title:'Dive & Turn Polish',   detail:'Block starts, dolphins, touch timing, finish drill'},
-      {t:'ff',     title:'🎉 Fun Friday',        detail:'Meet warmup 1000 · pull set · last meet warm-down'},
-    ]},
-
-  // WEEK 9 — Apr 5–9 — Refine / SPRING BREAK (Apr 3-9, optional practices, no meet)
-  { wk:9, phase:'refine', badge:'Spring Break Week', mon:monOf(9), isBreak:true,
-    yds:[2400,2400,2400,2400,1400],
-    days:[
-      {t:'bprac', title:'Spring Break Practice', detail:'Optional · aerobic refresh, technique tune-up',              note:'⚠ Low attendance'},
-      {t:'bprac', title:'Spring Break Practice', detail:'Optional · descending sets, race-pace touch',                note:'⚠ Low attendance'},
-      {t:'bprac', title:'Spring Break Practice', detail:'Optional · short sharp sets, feel-good swim',                note:'⚠ Low attendance'},
-      {t:'bprac', title:'Spring Break Practice', detail:'Optional · stroke drills, easy aerobic base',                note:'⚠ Low attendance'},
-      {t:'ff',    title:'🎉 Fun Friday',         detail:'Meet warmup 1000 · obstacle course · spring break relay',  note:'⚠ Low attendance'},
-    ]},
-
-  // WEEK 10 — Apr 12–16 — Refine  Meet 5
-  { wk:10, phase:'refine', badge:'Refine Phase', mon:monOf(10),
-    yds:[3000,2900,null,2800,1400],
-    days:[
-      {t:'refine', title:'Welcome Back Set',     detail:'Re-engage post-break · steady aerobic, stroke count focus'},
-      {t:'refine', title:'Pre-Meet Sharpener',   detail:'8×50 at goal pace, relay exchange practice'},
-      {t:'meet',   title:'🏊 DUAL MEET 5',      detail:'Final dual meet — conference standings on the line'},
-      {t:'refine', title:'Dive & Turn Polish',   detail:'Block starts, dolphins, touch timing, finish drill'},
-      {t:'ff',     title:'🎉 Fun Friday',        detail:'Meet warmup 1000 · relay carnival · team award votes'},
-    ]},
-
-  // WEEK 11 — Apr 19–23 — TAPER + LEAGUE CHAMPS (Champs Thu Apr 22 & Fri Apr 23)
-  { wk:11, phase:'taper', badge:'Taper Week', mon:monOf(11),
-    yds:[2000,1800,1500,null,null],
-    days:[
-      {t:'taper',  title:'Taper Monday',   detail:'Short sharp sets, feel fast, low volume'},
-      {t:'taper',  title:'Taper Tuesday',  detail:'Race-pace 25s, starts & turns, loosen up'},
-      {t:'taper',  title:'Champs Eve',     detail:'Easy 20-min swim, lineup walk-through, early rest'},
-      {t:'champs', title:'🏆 LEAGUE CHAMPS', detail:'Day 1 — Thu Apr 22 · Prelims · all individual events'},
-      {t:'champs', title:'🏆 LEAGUE CHAMPS', detail:'Day 2 — Fri Apr 23 · Finals & Relay Championships 🦅'},
-    ]},
-
-  // ── POST-SEASON ──────────────────────────────────────
-
-  // SECTIONS PREP WEEK — Apr 26–30
-  { wk:'S1', phase:'post', badge:'Sections Prep', mon:new Date(2027,3,26),
-    yds:[null,null,null,null,null],
-    days:[
-      {t:'secprac', title:'Sections Practice', detail:'Qualifying heat prep · no yard targets · swimmer-specific'},
-      {t:'secprac', title:'Sections Practice', detail:'Event pacing, relay lineups, race-day strategy review'},
-      {t:'secprac', title:'Sections Practice', detail:'Tune-up swims, starts, turns, mental walkthrough'},
-      {t:'secprac', title:'Sections Practice', detail:'Light sharpening — feel fast, stay confident'},
-      {t:'ff',      title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · light set · pep talk & team send-off'},
-    ]},
-
-  // SECTIONS WEEK — May 3–7 (Mon–Tue practice, Wed–Fri sections meet)
-  { wk:'S2', phase:'post', badge:'Sections Week', mon:new Date(2027,4,3),
-    yds:[null,null,null,null,null],
-    days:[
-      {t:'secprac',  title:'Sections Practice', detail:'Final tune-up — short, sharp, confident'},
-      {t:'secprac',  title:'Sections Eve',      detail:'Easy warm-down swim, visualize, rest up'},
-      {t:'sections', title:'📍 SECTIONS Day 1', detail:'Wed May 5 — Prelims · fight for state berths'},
-      {t:'sections', title:'📍 SECTIONS Day 2', detail:'Thu May 6 — Semifinals & relay heats'},
-      {t:'sections', title:'📍 SECTIONS Day 3', detail:'Fri May 7 — Finals 🦅 State qualifiers announced'},
-    ]},
-
-  // STATE WEEK — May 10–14 (no practice hosted; state Thu–Fri)
-  { wk:'ST', phase:'post', badge:'State Meet Week', mon:new Date(2027,4,10),
-    yds:[null,null,null,null,null],
-    days:[
-      {t:'off',   title:'No Practice',    detail:'Rest & travel prep for state qualifiers'},
-      {t:'off',   title:'No Practice',    detail:'State qualifiers: travel & arrival'},
-      {t:'off',   title:'No Practice',    detail:'Qualifiers depart — good luck Eagles! 🦅'},
-      {t:'state', title:'🏅 STATE DAY 1', detail:'Thu May 13 — Prelims'},
-      {t:'state', title:'🏅 STATE DAY 2', detail:'Fri May 14 — Semifinals & Finals'},
-    ]},
-
-  // BANQUET WEEK — May 17
-  { wk:'BQ', phase:'post', badge:'Season Close', mon:new Date(2027,4,17),
-    yds:[null,null,null,null,null],
-    days:[
-      {t:'banquet', title:'🎉 Team Banquet',  detail:'Mon May 17 — Awards, highlights & celebrating the Eagles!'},
-      {t:'off',     title:'Season Complete',  detail:'Fly Eagles Fly 🦅 — see you next year!'},
-      {t:'off',     title:'',                 detail:''},
-      {t:'off',     title:'',                 detail:''},
-      {t:'off',     title:'',                 detail:''},
-    ]},
-];
-
-// ── DIVIDERS ──────────────────────────────────────────────
-const dividers = {
-  1:  {label:'— Tryout / Technique Phase —', cls:'pd-tech'},
-  4:  {label:'— Build Phase —',              cls:'pd-build'},
-  8:  {label:'— Refine Phase —',             cls:'pd-refine'},
-  11: {label:'— Taper Week —',               cls:'pd-taper'},
-  S1: {label:'— Post-Season —',              cls:'pd-post'},
-};
-
-// ── RENDER ─────────────────────────────────────────────────
-const seasonEl  = document.getElementById('season');
-const yardBarEl = document.getElementById('yardBar');
-const MAX_YDS   = 4000;
-
-weeks.forEach((wk, wi) => {
-  // Divider?
-  const div = dividers[wk.wk];
-  if (div) {
-    const el = document.createElement('div');
-    el.className = 'phase-div';
-    el.innerHTML = `<div class="phase-div-line"></div>
-      <span class="phase-div-label ${div.cls}">${div.label}</span>
-      <div class="phase-div-line" style="background:linear-gradient(270deg,rgba(168,184,204,.22),transparent)"></div>`;
-    seasonEl.appendChild(el);
-  }
-
-  const dates    = weekDates(wk.mon);
-  const pracYds  = wk.yds.filter(y => y !== null);
-  const avgYds   = pracYds.length ? Math.round(pracYds.reduce((a,b)=>a+b,0)/pracYds.length) : null;
-  const wkLabel  = typeof wk.wk === 'number' ? `WK ${wk.wk}` : wk.wk;
-  const d4       = new Date(wk.mon); d4.setDate(d4.getDate()+4);
-  const dateRange= `${fmt(wk.mon)} – ${fmt(d4)}`;
-
-  const block = document.createElement('div');
-  block.className = 'week-block';
-  block.style.animationDelay = `${wi * 0.045}s`;
-  block.innerHTML = `
-    <div class="week-hdr">
-      <span class="wk-lbl">${wkLabel}</span>
-      <span class="wk-dates">${dateRange}</span>
-      <span class="wk-badge ${PHASE_CLASS[wk.phase]}">${wk.badge}</span>
-      ${avgYds ? `<span class="wk-yds">~${avgYds.toLocaleString()} yds avg</span>` : ''}
+  <header style="position:relative;max-width:1120px;margin:0 auto;padding:64px 24px 40px;">
+    <img src="./brand/vista-eagle-line.svg" alt="" aria-hidden="true" style="position:absolute;z-index:-1;top:-28px;right:-140px;width:min(760px,92vw);height:auto;opacity:.07;pointer-events:none;user-select:none;">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;margin-bottom:22px;">
+      <img src="./brand/vista-wordmark.svg" alt="Vista" style="height:16px;width:auto;display:block;">
+      <span aria-hidden="true" style="width:1px;height:14px;background:rgba(200,212,230,.3);"></span>
+      <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(200,212,230,.74);">Del Lago Eagles · Swim</span>
     </div>
-    <div class="days-row" id="dr${wi}"></div>`;
-  seasonEl.appendChild(block);
+    <h1 style="margin:0;font-weight:300;font-size:clamp(44px,7vw,84px);letter-spacing:-.035em;line-height:1.08;padding-bottom:.04em;background:linear-gradient(180deg,#ffffff 35%,#b2bdcd);-webkit-background-clip:text;background-clip:text;color:transparent;">Varsity Season Plan</h1>
+    <div style="margin-top:16px;font-size:15px;color:rgba(var(--ink, 238,242,248),.55);">Feb 8 – May 17, 2027</div>
+    <div aria-hidden="true" style="margin-top:28px;width:72px;height:2px;border-radius:2px;background:linear-gradient(90deg,#ffffff,#7f8da3 60%,transparent);"></div>
+  </header>
 
-  const row = block.querySelector(`#dr${wi}`);
-  wk.days.forEach((day, di) => {
-    const yds = wk.yds[di];
-    const showYds = yds !== null && !['meet','champs','sections','state','banquet','off'].includes(day.t);
-    const card = document.createElement('div');
-    card.className = `day-card ${TYPE_CLASS[day.t] || 'c-off'}`;
-    card.innerHTML = `
-      <div class="day-name">${DAYS[di]}</div>
-      <div class="day-date">${dates[di]}</div>
-      <div class="day-title">${day.title}</div>
-      <div class="day-detail">${day.detail}</div>
-      ${showYds ? `<span class="yds-tag">${yds.toLocaleString()} yds</span>` : ''}
-      ${day.note ? `<span class="note-tag">${day.note}</span>` : ''}`;
-    card.addEventListener('click', () => openWorkoutModal(wi, di));
-    row.appendChild(card);
-  });
 
-  // Yardage bar (regular season weeks only)
-  if (typeof wk.wk === 'number') {
-    const pct = avgYds ? (avgYds / MAX_YDS) * 100 : 4;
-    const col = document.createElement('div');
-    col.className = 'bar-col';
-    col.innerHTML = `
-      <div class="bar-fill" style="height:${pct}%;background:linear-gradient(180deg,${BAR_COLOR[wk.phase]},${BAR_COLOR[wk.phase]}88)"></div>
-      <div class="bar-lbl">W${wk.wk}</div>`;
-    yardBarEl.appendChild(col);
-  }
-});
-
-// ── WORKOUT MODAL ──────────────────────────────────────────
-const modalOverlay = document.getElementById('modalOverlay');
-const modalContent = document.getElementById('modalContent');
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-function renderSection(label, cls, section) {
-  if (!section) return '';
-  const sets = (section.sets || []).map(s => `<li>${escapeHtml(s)}</li>`).join('');
-  const yds  = section.distance ? `<span class="modal-section-yards">${section.distance.toLocaleString()} yds</span>` : '';
-  return `
-    <div class="modal-section">
-      <div class="modal-section-header">
-        <span class="modal-section-label ${cls}">${label}</span>
-        ${yds}
+  <main style="max-width:1120px;margin:0 auto;padding:24px 24px 40px;">
+    <sc-for list="{{ weeks }}" as="wk" hint-placeholder-count="6">
+      <div style="margin-bottom:10px;">
+        <sc-if value="{{ wk.hasDivider }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:12px;margin:48px 0 20px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:{{ wk.dividerColor }};"></span>
+            <span style="font-size:20px;font-weight:500;letter-spacing:-.01em;">{{ wk.dividerLabel }}</span>
+            <span style="flex:1;height:1px;background:rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));"></span>
+          </div>
+        </sc-if>
+        <div onClick="{{ wk.toggle }}" role="button" aria-expanded="{{ wk.isOpen }}" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin:0 0 10px;padding:12px 16px;border-radius:16px;cursor:pointer;background:var(--frost, none), linear-gradient({{ wk.hdrBg }}, {{ wk.hdrBg }});border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf-frost, blur(30px) saturate(120%) brightness(var(--bd-b, .45)));-webkit-backdrop-filter:var(--glass-bf-frost, blur(30px) saturate(120%) brightness(var(--bd-b, .45)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));transition:background .45s ease, border-color .45s ease;" style-hover="border-color:rgba(var(--glass-rgb, 255,255,255),calc(.18 * var(--glass-k, 1)));">
+          <span style="font-size:14px;font-weight:500;">{{ wk.label }}</span>
+          <sc-if value="{{ wk.isCurrent }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),calc(.92 * var(--glass-k, 1)));color:#0a0f1c;">This week</span>
+          </sc-if>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.45);">{{ wk.range }}</span>
+          <span style="font-size:12px;color:color-mix(in oklab, {{ wk.phaseColor }}, #000 var(--tint-dark, 0%));">{{ wk.badge }}</span>
+          <span style="margin-left:auto;font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.4);">{{ wk.avgText }}</span>
+          <span style="display:inline-block;font-size:14px;line-height:1;color:rgba(var(--ink, 238,242,248),.5);transition:transform .55s cubic-bezier(.33,1,.68,1);transform:{{ wk.chevron }};">⌄</span>
+        </div>
+        <div aria-hidden="{{ wk.hidden }}" inert="{{ wk.inert }}" style="display:grid;grid-template-rows:{{ wk.rows }};opacity:{{ wk.fade }};transform:{{ wk.shift }};transition:grid-template-rows .6s cubic-bezier(.33,1,.68,1), opacity .5s ease, transform .6s cubic-bezier(.33,1,.68,1);">
+          <div style="min-height:0;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:8px;">
+          <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
+            <sc-if value="{{ d.isOff }}" hint-placeholder-val="{{ false }}">
+              <div onClick="{{ d.open }}" style="border-radius:20px;padding:14px 16px;min-height:120px;border:1px dashed rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));cursor:pointer;">
+                <div style="font-family:'Geist Mono',monospace;font-size:11px;color:rgba(var(--ink, 238,242,248),.3);">{{ d.name }} · {{ d.date }}</div>
+                <div style="margin-top:10px;font-size:13px;color:rgba(var(--ink, 238,242,248),.3);">{{ d.title }}</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ d.isOn }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ d.open }}" style="position:relative;border-radius:20px;padding:14px 16px 16px;min-height:120px;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--frost, none), radial-gradient(120% 80% at 0% 0%, rgba(var(--glass-rgb, 255,255,255),calc(.11 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(0 * var(--glass-k, 1))) 55%), linear-gradient(155deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))) 0%, rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 45%, rgba(var(--glass-rgb, 255,255,255),calc(.015 * var(--glass-k, 1))) 70%, rgba(var(--glass-rgb, 255,255,255),calc(.05 * var(--glass-k, 1))) 100%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.16 * var(--glass-k, 1))), 0 14px 34px rgba(0,0,0,.35);">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span style="width:7px;height:7px;border-radius:50%;background:{{ d.tint }};box-shadow:0 0 10px {{ d.tint }};"></span>
+                  <span style="font-family:'Geist Mono',monospace;font-size:11px;color:rgba(var(--ink, 238,242,248),.5);">{{ d.name }} · {{ d.date }}</span>
+                </div>
+                <div style="font-size:14px;font-weight:500;line-height:1.3;text-wrap:pretty;">{{ d.title }}</div>
+                <sc-if value="{{ d.showDetail }}" hint-placeholder-val="{{ true }}">
+                  <div style="font-size:12px;line-height:1.45;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">{{ d.detail }}</div>
+                </sc-if>
+                <div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;">
+                  <sc-if value="{{ d.showYds }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));color:rgba(var(--ink, 238,242,248),.7);">{{ d.ydsText }}</span>
+                  </sc-if>
+                  <sc-if value="{{ d.hasNote }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(255,204,102,.1);color:color-mix(in oklab, #ffd37a, #000 var(--tint-dark, 0%));">{{ d.note }}</span>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+          </sc-for>
+        </div>
+        </div>
+        </div>
       </div>
-      <ul>${sets}</ul>
-    </div>`;
-}
+    </sc-for>
+  </main>
 
-function openWorkoutModal(wkIndex, dayIndex) {
-  const wk   = weeks[wkIndex];
-  const day  = wk.days[dayIndex];
-  const date = weekDates(wk.mon)[dayIndex];
-  const dayName = DAYS[dayIndex];
-  const yds  = wk.yds[dayIndex];
-  const w    = day.workout;
+  <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
+    <section style="max-width:1120px;margin:0 auto;padding:0 24px 40px;">
+      <div style="border-radius:24px;background:var(--frost, none), linear-gradient(rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));overflow:hidden;">
+        <button onClick="{{ toggleKey }}" aria-expanded="{{ keyOpen }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;background:none;border:none;color:rgb(var(--ink, 238,242,248));font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;text-align:left;" style-hover="background:rgba(var(--glass-rgb, 255,255,255),calc(.03 * var(--glass-k, 1)));">
+          <span>Key</span>
+          <span style="display:inline-block;font-size:14px;color:rgba(var(--ink, 238,242,248),.5);transition:transform .25s ease;transform:{{ keyChevron }};">⌄</span>
+        </button>
+        <sc-if value="{{ keyOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 22px;">
+            <sc-for list="{{ legend }}" as="l" hint-placeholder-count="12">
+              <div style="display:flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));font-size:12px;color:rgba(var(--ink, 238,242,248),.7);">
+                <span style="width:7px;height:7px;border-radius:50%;background:{{ l.color }};box-shadow:0 0 8px {{ l.color }};"></span>{{ l.label }}
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+  </sc-if>
 
-  let body = '';
+  <footer style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:48px 24px 44px;margin-top:8px;border-top:1px solid rgba(var(--glass-rgb, 255,255,255),.06);">
+    <img src="./brand/vista-logo.svg" alt="Vista Eagles" style="width:132px;height:auto;display:block;filter:drop-shadow(0 8px 28px rgba(0,32,78,.9));">
+    <div style="text-align:center;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,212,230,.62);">Vista del Lago Eagles · Varsity Swim · 2027 Season Planner</div>
+  </footer>
 
-  if (w && (w.warmup || w.mainSet || w.cooldown || w.activity)) {
-    body += renderSection('Warmup',   'ms-warmup',   w.warmup);
-    body += renderSection('Main Set', 'ms-main',     w.mainSet);
-    body += renderSection('Cooldown', 'ms-cooldown', w.cooldown);
-    body += renderSection('Activity', 'ms-activity', w.activity);
-    if (w.notes) {
-      body += `<div class="modal-notes"><span class="modal-notes-label">Coach's Note</span>${escapeHtml(w.notes)}</div>`;
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:64px 16px 40px;overflow-y:auto;background:rgba(var(--scrim-rgb, 5,8,18),.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
+      <div onClick="{{ stop }}" role="dialog" aria-modal="true" style="position:relative;width:100%;max-width:620px;padding:32px;border-radius:28px;background:var(--frost, none), linear-gradient(160deg, {{ m.tintBg }}, rgba(var(--panel-rgb, 20,26,44),.72) 50%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.14 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf-strong, blur(36px) saturate(130%) brightness(var(--bd-b, .5)));-webkit-backdrop-filter:var(--glass-bf-strong, blur(36px) saturate(130%) brightness(var(--bd-b, .5)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.14 * var(--glass-k, 1))), 0 30px 80px rgba(0,0,0,.5);">
+        <button onClick="{{ close }}" aria-label="Close" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.12 * var(--glass-k, 1)));background:rgba(var(--glass-rgb, 255,255,255),calc(.06 * var(--glass-k, 1)));color:rgb(var(--ink, 238,242,248));font-size:18px;line-height:1;cursor:pointer;" style-hover="background:rgba(var(--glass-rgb, 255,255,255),calc(.14 * var(--glass-k, 1)));">×</button>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:{{ m.tint }};box-shadow:0 0 10px {{ m.tint }};"></span>
+          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.55);">{{ m.dayName }} · {{ m.date }}, 2027</span>
+        </div>
+        <h2 style="margin:14px 0 8px;font-size:32px;font-weight:400;letter-spacing:-.025em;line-height:1.1;padding-right:40px;">{{ m.title }}</h2>
+        <sc-if value="{{ m.hasDetail }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.6);">{{ m.detail }}</div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
+          <sc-for list="{{ m.sections }}" as="s" hint-placeholder-count="0">
+            <div style="padding:16px 18px;border-radius:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.05 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:{{ s.color }};"></span>
+                <span style="font-size:13px;font-weight:500;color:color-mix(in oklab, {{ s.color }}, #000 var(--tint-dark, 0%));">{{ s.label }}</span>
+                <span style="margin-left:auto;font-family:'Geist Mono',monospace;font-size:11px;color:rgba(var(--ink, 238,242,248),.45);">{{ s.yds }}</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <sc-for list="{{ s.sets }}" as="set" hint-placeholder-count="3">
+                  <div style="font-size:14px;line-height:1.5;color:rgba(var(--ink, 238,242,248),.85);">{{ set }}</div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ m.hasNotes }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:16px 18px;border-radius:18px;background:rgba(255,204,102,.07);border:1px solid rgba(255,204,102,.16);">
+              <div style="font-size:12px;font-weight:500;color:color-mix(in oklab, #ffd37a, #000 var(--tint-dark, 0%));margin-bottom:6px;">Coach's Note</div>
+              <div style="font-size:14px;line-height:1.55;color:color-mix(in oklab, rgba(255,228,170,.9), #000 var(--tint-dark, 0%));">{{ m.notes }}</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ m.hasEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:20px 18px;border-radius:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.7);">{{ m.empty }}</div>
+          </sc-if>
+        </div>
+        <sc-if value="{{ m.hasTotal }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;margin-top:20px;padding:0 4px;font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.6);">
+            <span>{{ m.totalLabel }}</span><span>{{ m.total }}</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showDetails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;},&quot;showLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;}}">
+const TINT = {
+  tryout:'#b8cce8', tech:'#7ec8f4', build:'#5ce6a0', refine:'#f9a55a', taper:'#ffb07a',
+  ff:'#d0dce8', meet:'#ff6b8e', champs:'#b49cf5', bprac:'#8fa6c4', bye:'#8a96aa',
+  secprac:'#b07ae8', sections:'#c77dff', state:'#ff7070', banquet:'#6ee87c', off:'#556',
+};
+const PHASE = { tryout:'#b8cce8', tech:'#7ec8f4', build:'#5ce6a0', refine:'#f9a55a', taper:'#ffb07a', post:'#c8b0f0' };
+const LEGEND = [
+  ['Tryout','tryout'],['Technique','tech'],['Build','build'],['Refine','refine'],['Taper','taper'],
+  ['🎉 Fun Friday','ff'],['Dual Meet','meet'],['League Champs','champs'],['Spring Break Practice','bprac'],
+  ['Sections','sections'],['State Meet','state'],['Banquet','banquet'],
+];
+const hexA = (hex, a) => {
+  const h = hex.replace('#','');
+  const f = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+  const n = parseInt(f, 16);
+  return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;
+};
+const NO_YDS = ['meet','champs','sections','state','banquet','off'];
+// Workouts stay hidden until the day of that practice (swimmer's local date).
+const NOT_PRACTICE = ['off','meet','champs','sections','state','banquet'];
+const startOfToday = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
+const dayDate = (wk, di) => { const p = new Date(wk.mon); p.setDate(p.getDate() + di); p.setHours(0,0,0,0); return p; };
+const isLocked = (wk, di, day) => !NOT_PRACTICE.includes(day.t) && dayDate(wk, di) > startOfToday();
+// Before practice day: training-phase days show a generic title and no focus line.
+const MASK_TITLE = ['tech','build','refine','taper'];
+const shownDay = (day, locked) => locked
+  ? { title: MASK_TITLE.includes(day.t) ? 'Standard Practice' : day.title, detail: day.t === 'bprac' ? 'Optional' : '' }
+  : { title: day.title, detail: day.detail };
+
+class Component extends DCLogic {
+  state = { sel: null, ready: !!window.SEASON, keyOpen: false, openWeeks: null };
+  componentDidMount() {
+    if (!window.SEASON) this._t = setInterval(() => { if (window.SEASON) { clearInterval(this._t); this.setState({ ready: true }); } }, 50);
+    this._key = e => { if (e.key === 'Escape') this.setState({ sel: null }); };
+    document.addEventListener('keydown', this._key);
+  }
+  componentWillUnmount() { clearInterval(this._t); document.removeEventListener('keydown', this._key); }
+  open(wi, di) { this.setState({ sel: [wi, di] }); document.body.style.overflow = 'hidden'; }
+  close = () => { this.setState({ sel: null }); document.body.style.overflow = ''; };
+
+  buildModal(S) {
+    const [wi, di] = this.state.sel;
+    const wk = S.weeks[wi], day = wk.days[di], yds = wk.yds[di], w = day.workout;
+    const tint = TINT[day.t] || TINT.off;
+    const pDate = dayDate(wk, di);
+    const locked = isLocked(wk, di, day);
+    const shown = shownDay(day, locked);
+    const m = {
+      tint, tintBg: hexA(tint, .16), dayName: S.DAYS[di], date: S.weekDates(wk.mon)[di],
+      title: shown.title || 'No Practice', detail: shown.detail, hasDetail: !!shown.detail,
+      sections: [], hasNotes: false, notes: '', hasEmpty: false, empty: '', hasTotal: false, total: '', totalLabel: '',
+    };
+    if (locked) {
+      m.hasEmpty = true;
+      m.empty = `🔒 Workout unlocks ${pDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}. Check back on practice day!`;
+      if (yds) { m.hasTotal = true; m.totalLabel = 'Planned yardage'; m.total = `${yds.toLocaleString()} yds`; }
+    } else if (w && (w.warmup || w.mainSet || w.cooldown || w.activity)) {
+      [['Warmup','warmup','#7ec8f4'],['Main Set','mainSet','#5ce6a0'],['Cooldown','cooldown','#c8b0f0'],['Activity','activity','#ffb07a']]
+        .forEach(([label, k, color]) => { const s = w[k]; if (s) m.sections.push({ label, color, yds: s.distance ? `${s.distance.toLocaleString()} yds` : '', sets: s.sets || [] }); });
+      if (w.notes) { m.hasNotes = true; m.notes = w.notes; }
+      if (yds) { m.hasTotal = true; m.totalLabel = 'Total yardage'; m.total = `${yds.toLocaleString()} yds`; }
+    } else {
+      m.hasEmpty = true;
+      if (day.t === 'off') m.empty = 'Rest day — no practice scheduled.';
+      else if (['meet','champs','sections','state'].includes(day.t)) m.empty = 'Meet day! See coach for warmup time, lineup, and event order.';
+      else if (day.t === 'banquet') m.empty = 'Team banquet — celebration time!';
+      else if (day.t === 'bye') m.empty = 'Bye week — no meet scheduled.';
+      else if (!day.title) m.empty = 'Nothing scheduled.';
+      else {
+        m.empty = "Coach hasn't posted this workout yet — check back soon!";
+        if (yds) { m.hasTotal = true; m.totalLabel = 'Planned yardage'; m.total = `${yds.toLocaleString()} yds`; }
+      }
     }
-    if (yds) {
-      body += `<div class="modal-total"><span>TOTAL YARDAGE</span><span>${yds.toLocaleString()} yds</span></div>`;
-    }
-  } else if (day.t === 'off') {
-    body = `<div class="modal-empty"><div class="modal-empty-icon">🛌</div>Rest day — no practice scheduled.<br><span style="opacity:.7">${escapeHtml(day.detail || '')}</span></div>`;
-  } else if (['meet','champs','sections','state'].includes(day.t)) {
-    body = `<div class="modal-empty"><div class="modal-empty-icon">🏊</div>Meet day! See coach for warmup time, lineup, and event order.<br><span style="opacity:.7">${escapeHtml(day.detail || '')}</span></div>`;
-  } else if (day.t === 'banquet') {
-    body = `<div class="modal-empty"><div class="modal-empty-icon">🎉</div>Team banquet — celebration time!<br><span style="opacity:.7">${escapeHtml(day.detail || '')}</span></div>`;
-  } else if (day.t === 'bye') {
-    body = `<div class="modal-empty"><div class="modal-empty-icon">📅</div>Bye week — no meet scheduled.<br><span style="opacity:.7">${escapeHtml(day.detail || '')}</span></div>`;
-  } else if (!day.title) {
-    body = `<div class="modal-empty"><div class="modal-empty-icon">·</div>Nothing scheduled.</div>`;
-  } else {
-    body = `<div class="modal-empty"><div class="modal-empty-icon">📋</div>Coach hasn't posted this workout yet — check back soon!</div>`;
-    if (yds) body += `<div class="modal-total"><span>PLANNED YARDAGE</span><span>${yds.toLocaleString()} yds</span></div>`;
+    return m;
   }
 
-  modalContent.innerHTML = `
-    <button class="modal-close" onclick="closeWorkoutModal()" aria-label="Close">×</button>
-    <div class="modal-day-name">${dayName}</div>
-    <div class="modal-day-date">${escapeHtml(date)}, 2027</div>
-    <div class="modal-title" id="modalTitle">${escapeHtml(day.title || 'No Practice')}</div>
-    ${day.detail ? `<div class="modal-subtitle">${escapeHtml(day.detail)}</div>` : ''}
-    ${body}
-  `;
-  modalOverlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  modalContent.scrollTop = 0;
+  renderVals() {
+    const S = window.SEASON;
+    const base = {
+      showLegend: this.props.showLegend ?? true,
+      showDetails: this.props.showDetails ?? true,
+      showArc: this.props.showYardageArc ?? true,
+      legend: LEGEND.map(([label, t]) => ({ label, color: TINT[t] })),
+      close: this.close, stop: e => e.stopPropagation(),
+      keyOpen: this.state.keyOpen, keyChevron: this.state.keyOpen ? 'rotate(180deg)' : 'none',
+      toggleKey: () => this.setState(s => ({ keyOpen: !s.keyOpen })),
+      modalOpen: false, m: {}, weeks: [], bars: [],
+    };
+    if (!S) return base;
+    const MAX = 4000;
+    const bars = [];
+    const today = startOfToday();
+    let curWi = S.weeks.findIndex(wk => { const end = new Date(wk.mon); end.setDate(end.getDate() + 7); return today >= wk.mon && today < end; });
+    const inSeason = curWi >= 0;
+    if (curWi < 0) curWi = 0; // outside the season: open week 1
+    const open = this.state.openWeeks || { [curWi]: true };
+    const toggleWeek = wi => this.setState(s => { const o = { ...(s.openWeeks || { [curWi]: true }) }; o[wi] = !o[wi]; return { openWeeks: o }; });
+    const weeks = S.weeks.map((wk, wi) => {
+      const dates = S.weekDates(wk.mon);
+      const prac = wk.yds.filter(y => y !== null);
+      const avg = prac.length ? Math.round(prac.reduce((a, b) => a + b, 0) / prac.length) : null;
+      const d4 = new Date(wk.mon); d4.setDate(d4.getDate() + 4);
+      const div = S.dividers[wk.wk];
+      if (typeof wk.wk === 'number') bars.push({ label: `W${wk.wk}`, pct: `${avg ? (avg / MAX) * 100 : 4}%`, color: PHASE[wk.phase], title: avg ? `~${avg.toLocaleString()} yds avg` : '' });
+      return {
+        label: typeof wk.wk === 'number' ? `Week ${wk.wk}` : wk.wk,
+        range: `${S.fmt(wk.mon)} – ${S.fmt(d4)}`,
+        badge: wk.badge, phaseColor: PHASE[wk.phase],
+        avgText: avg ? `~${avg.toLocaleString()} yds avg` : '',
+        isCurrent: inSeason && wi === curWi, isOpen: !!open[wi], rows: open[wi] ? '1fr' : '0fr', fade: open[wi] ? 1 : 0, shift: open[wi] ? 'none' : 'translateY(-6px)', hidden: open[wi] ? 'false' : 'true', inert: open[wi] ? undefined : '', chevron: open[wi] ? 'rotate(180deg)' : 'none',
+        hdrBg: open[wi] ? 'rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)))' : 'rgba(var(--glass-rgb, 255,255,255),calc(.065 * var(--glass-k, 1)))', toggle: () => toggleWeek(wi),
+        hasDivider: !!div, dividerLabel: div ? div.label.replace(/—/g, '').trim() : '', dividerColor: PHASE[wk.phase === 'tryout' ? 'tech' : wk.phase],
+        days: wk.days.map((day, di) => {
+          const yds = wk.yds[di];
+          const tint = TINT[day.t] || TINT.off;
+          const isOff = day.t === 'off';
+          const shown = shownDay(day, isLocked(wk, di, day));
+          return {
+            name: S.DAYS[di], date: dates[di], title: shown.title, detail: shown.detail,
+            showDetail: (this.props.showDetails ?? true) && !!shown.detail,
+            isOff, isOn: !isOff, tint, tintBg: hexA(tint, .14),
+            showYds: yds !== null && !NO_YDS.includes(day.t), ydsText: yds ? `${yds.toLocaleString()} yds` : '',
+            hasNote: !!day.note, note: day.note || '',
+            open: () => this.open(wi, di),
+          };
+        }),
+      };
+    });
+    return { ...base, weeks, bars, modalOpen: !!this.state.sel, m: this.state.sel ? this.buildModal(S) : {} };
+  }
 }
-
-function closeWorkoutModal() {
-  modalOverlay.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-modalOverlay.addEventListener('click', e => {
-  if (e.target === modalOverlay) closeWorkoutModal();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeWorkoutModal();
-});
 </script>
 </body>
 </html>
