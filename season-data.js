@@ -7,11 +7,11 @@ function monOf(wk) { // week 1 = Feb 8 2027 (first allowable practice date)
   d.setDate(d.getDate() + (wk-1)*7);
   return d;
 }
-function weekDates(mon) {
-  return [0,1,2,3,4].map(i=>{ const d=new Date(mon); d.setDate(d.getDate()+i); return fmt(d); });
+function weekDates(mon) { // Mon–Sat; weeks only list a Saturday when something is on it (League Champs)
+  return [0,1,2,3,4,5].map(i=>{ const d=new Date(mon); d.setDate(d.getDate()+i); return fmt(d); });
 }
 
-const DAYS = ['MON','TUE','WED','THU','FRI'];
+const DAYS = ['MON','TUE','WED','THU','FRI','SAT'];
 
 // type → CSS class
 const TYPE_CLASS = {
@@ -136,62 +136,73 @@ const weeks = [
       },
     ]},
 
-  // WEEK 4 — Mar 1–5 — Build  Meet 1
+  // ── LEAGUE MEETS ─────────────────────────────────────
+  // From the 2027 league meet schedule. League meets are Thursdays. Vista's meets:
+  //   Thu Mar 18  Tri Meet — HOME vs Woodcreek & Ponderosa
+  //   Thu Apr 1   Tri Meet — HOME vs Rio Americano & Christian Brothers
+  //   Thu Apr 15  Tri Meet — AWAY at Bella Vista, with Inderkum
+  //   Fri Apr 23 – Sat Apr 24  League Championships — HOME
+  // Vista has no meet on Mar 4, Mar 11, Mar 25 (no league meets that day) or Apr 8 (spring break).
+  // Meet days carry a `meet` object ({ label, home, site, vs }) that the home page reads.
+
+  // WEEK 4 — Mar 1–5 — Build  (no Vista meet Thu Mar 4)
   { wk:4, phase:'build', badge:'Build Phase', mon:monOf(4),
-    yds:[2900,3000,null,3100,1400],
+    yds:[2900,3000,3100,3000,1400],
     days:[
       {t:'build', title:'Aerobic Base',    detail:'200s & 400s at easy cruise pace, stroke count focus'},
       {t:'build', title:'Pre-Meet Tune',   detail:'Race-pace 50s, start reps, event visualization'},
-      {t:'meet',  title:'🏊 DUAL MEET 1', detail:'Home meet — first race of the season!'},
       {t:'build', title:'Recovery Swim',   detail:'Easy 200s, drill sets, kick focus'},
+      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
       {t:'ff',    title:'🎉 Fun Friday',   detail:'Meet warmup 1000 · threshold 50s · noodle relay battle'},
     ]},
 
-  // WEEK 5 — Mar 8–12 — Build  Meet 2
+  // WEEK 5 — Mar 8–12 — Build  (no Vista meet Thu Mar 11)
   { wk:5, phase:'build', badge:'Build Phase', mon:monOf(5),
-    yds:[3200,3200,null,3300,1400],
+    yds:[3200,3200,3300,3200,1400],
     days:[
       {t:'build', title:'Threshold Ladders', detail:'100→200→400→200→100 at CSS pace'},
       {t:'build', title:'Pre-Meet Sharpener',detail:'8×50 at goal pace, relay exchange practice'},
-      {t:'meet',  title:'🏊 DUAL MEET 2',   detail:'Away meet — execution & split focus'},
       {t:'build', title:'Active Recovery',   detail:'Drill & kick sets, loosen post-meet'},
+      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
       {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · pull set · partner towing race'},
     ]},
 
-  // WEEK 6 — Mar 15–19 — Build  Bye
+  // WEEK 6 — Mar 15–19 — Build  Tri Meet 1 (Thu Mar 18, home)
   { wk:6, phase:'build', badge:'Build Phase', mon:monOf(6),
-    yds:[3400,3400,3300,3500,1400],
+    yds:[3400,3400,3500,null,1400],
     days:[
       {t:'build', title:'Broken Swims',      detail:'Broken 200s with :10 rest at goal pace'},
       {t:'build', title:'Kick & Pull Focus', detail:'Board sets, pull buoy, lactate threshold work'},
-      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
       {t:'build', title:'Negative Split Sets',detail:'Back-half faster, descend 100s, pace control'},
+      {t:'meet',  title:'🏊 TRI MEET 1',    detail:'Home · vs Woodcreek & Ponderosa · first race of the season!',
+        meet:{label:'Tri Meet 1', home:true, site:'Vista del Lago', vs:['Woodcreek','Ponderosa']}},
       {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · 200 IM time trial · costume swim'},
     ]},
 
-  // WEEK 7 — Mar 22–26 — Build  Meet 3  (PEAK)
+  // WEEK 7 — Mar 22–26 — Build  (PEAK · no league meets Thu Mar 25)
   { wk:7, phase:'build', badge:'Build Phase', mon:monOf(7),
-    yds:[3600,3700,null,4000,1400],
+    yds:[3600,3700,4000,3800,1400],
     days:[
       {t:'build', title:'Race Simulation',   detail:'Full event swims at race pace, timed trials'},
       {t:'build', title:'Pre-Meet Sharpener',detail:'Fast 50s, relay handoffs, mental prep'},
-      {t:'meet',  title:'🏊 DUAL MEET 3',   detail:'Big rival meet — season benchmark'},
       {t:'build', title:'Peak Yardage Day',  detail:'Season-high 4000 yds — long aerobic sets'},
+      {t:'bye',   title:'Bye Week — No Meet',detail:'Quality practice, strong aerobic push'},
       {t:'ff',    title:'🎉 Fun Friday',     detail:'Meet warmup 1000 · speed 25s · diving rings game'},
     ]},
 
-  // WEEK 8 — Mar 29–Apr 2 — Refine  Meet 4
+  // WEEK 8 — Mar 29–Apr 2 — Refine  Tri Meet 2 (Thu Apr 1, home)
   { wk:8, phase:'refine', badge:'Refine Phase', mon:monOf(8),
-    yds:[3200,3100,null,3000,1400],
+    yds:[3200,3100,3000,null,1400],
     days:[
       {t:'refine', title:'Descend to Race Pace', detail:'Volume drops, intensity climbs — event specificity'},
       {t:'refine', title:'Event-Specific Sets',  detail:'Each swimmer trains primary event at goal pace'},
-      {t:'meet',   title:'🏊 DUAL MEET 4',      detail:'Home meet — execute the race plan'},
       {t:'refine', title:'Dive & Turn Polish',   detail:'Block starts, dolphins, touch timing, finish drill'},
+      {t:'meet',   title:'🏊 TRI MEET 2',       detail:'Home · vs Rio Americano & Christian Brothers',
+        meet:{label:'Tri Meet 2', home:true, site:'Vista del Lago', vs:['Rio Americano','Christian Brothers']}},
       {t:'ff',     title:'🎉 Fun Friday',        detail:'Meet warmup 1000 · pull set · last meet warm-down'},
     ]},
 
-  // WEEK 9 — Apr 5–9 — Refine / SPRING BREAK (Apr 3-9, optional practices, no meet)
+  // WEEK 9 — Apr 5–9 — Refine / SPRING BREAK (Apr 3-9, optional practices, no Vista meet Thu Apr 8)
   { wk:9, phase:'refine', badge:'Spring Break Week', mon:monOf(9), isBreak:true,
     yds:[2400,2400,2400,2400,1400],
     days:[
@@ -202,26 +213,30 @@ const weeks = [
       {t:'ff',    title:'🎉 Fun Friday',         detail:'Meet warmup 1000 · obstacle course · spring break relay',  note:'⚠ Low attendance'},
     ]},
 
-  // WEEK 10 — Apr 12–16 — Refine  Meet 5
+  // WEEK 10 — Apr 12–16 — Refine  Tri Meet 3 (Thu Apr 15, away at Bella Vista)
   { wk:10, phase:'refine', badge:'Refine Phase', mon:monOf(10),
-    yds:[3000,2900,null,2800,1400],
+    yds:[3000,2900,2800,null,1400],
     days:[
       {t:'refine', title:'Welcome Back Set',     detail:'Re-engage post-break · steady aerobic, stroke count focus'},
       {t:'refine', title:'Pre-Meet Sharpener',   detail:'8×50 at goal pace, relay exchange practice'},
-      {t:'meet',   title:'🏊 DUAL MEET 5',      detail:'Final dual meet — conference standings on the line'},
       {t:'refine', title:'Dive & Turn Polish',   detail:'Block starts, dolphins, touch timing, finish drill'},
+      {t:'meet',   title:'🏊 TRI MEET 3',       detail:'Away at Bella Vista · with Inderkum · last meet before champs',
+        meet:{label:'Tri Meet 3', home:false, site:'Bella Vista', vs:['Bella Vista','Inderkum']}},
       {t:'ff',     title:'🎉 Fun Friday',        detail:'Meet warmup 1000 · relay carnival · team award votes'},
     ]},
 
-  // WEEK 11 — Apr 19–23 — TAPER + LEAGUE CHAMPS (Champs Thu Apr 22 & Fri Apr 23)
+  // WEEK 11 — Apr 19–24 — TAPER + LEAGUE CHAMPS (Fri Apr 23 & Sat Apr 24, home). The only week with a Saturday.
   { wk:11, phase:'taper', badge:'Taper Week', mon:monOf(11),
-    yds:[2000,1800,1500,null,null],
+    yds:[2000,1800,1600,1500,null,null],
     days:[
       {t:'taper',  title:'Taper Monday',   detail:'Short sharp sets, feel fast, low volume'},
       {t:'taper',  title:'Taper Tuesday',  detail:'Race-pace 25s, starts & turns, loosen up'},
+      {t:'taper',  title:'Taper Wednesday',detail:'Short race-pace efforts, relay exchanges, stay loose'},
       {t:'taper',  title:'Champs Eve',     detail:'Easy 20-min swim, lineup walk-through, early rest'},
-      {t:'champs', title:'🏆 LEAGUE CHAMPS', detail:'Day 1 — Thu Apr 22 · Prelims · all individual events'},
-      {t:'champs', title:'🏆 LEAGUE CHAMPS', detail:'Day 2 — Fri Apr 23 · Finals & Relay Championships 🦅'},
+      {t:'champs', title:'🏆 LEAGUE CHAMPS', detail:'Day 1 — Fri Apr 23 · Home · Prelims · all individual events',
+        meet:{label:'League Champs', home:true, site:'Vista del Lago'}},
+      {t:'champs', title:'🏆 LEAGUE CHAMPS', detail:'Day 2 — Sat Apr 24 · Home · Finals & Relay Championships 🦅',
+        meet:{label:'League Champs', home:true, site:'Vista del Lago'}},
     ]},
 
   // ── POST-SEASON ──────────────────────────────────────
