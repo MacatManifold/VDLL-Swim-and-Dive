@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <link rel="icon" type="image/svg+xml" href="brand/vista-eagle.svg">
-<title>Vista del Lago Eagles — JV Swim 2027</title>
+<title>Vista del Lago Eagles Swim &amp; Dive</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="./season-data.js"></script>
@@ -19,286 +19,193 @@
 html,body{margin:0;padding:0;background:var(--page-base,#000);}
 body{font-family:'Geist',system-ui,sans-serif;color:rgb(var(--ink, 238,242,248));-webkit-font-smoothing:antialiased;}
 *{box-sizing:border-box;}
-a{color:#cfe0f5;text-decoration:none;}
-a:hover{color:#ffffff;}
+a{color:inherit;text-decoration:none;}
 </style>
 </helmet>
-<div data-ripple-host="1" style="isolation:isolate;min-height:100vh;position:relative;overflow-x:hidden;background:var(--page-bg, radial-gradient(55% 38% at 12% 0%, rgba(30,64,140,.32), transparent 70%), radial-gradient(45% 32% at 92% 35%, rgba(22,48,110,.22), transparent 70%), radial-gradient(55% 35% at 25% 95%, rgba(26,52,120,.2), transparent 70%), #000);background-attachment:fixed;">
-  <dc-import name="TopNav" active="JV" style="position:sticky;top:0;z-index:20;display:block;" hint-size="100%,62px"></dc-import>
+<div data-ripple-host="1" style="isolation:isolate;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;background:var(--page-bg, #020a1d);background-attachment:fixed;">
+  <dc-import name="TopNav" active="Home" style="position:sticky;top:0;z-index:20;display:block;" hint-size="100%,62px"></dc-import>
 
-  <header style="position:relative;max-width:1120px;margin:0 auto;padding:64px 24px 40px;">
-    <img src="./brand/vista-eagle-line.svg" alt="" aria-hidden="true" style="position:absolute;z-index:-1;top:-28px;right:-140px;width:min(760px,92vw);height:auto;opacity:.07;pointer-events:none;user-select:none;">
-    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;margin-bottom:22px;">
-      <img src="./brand/vista-wordmark.svg" alt="Vista" style="height:16px;width:auto;display:block;">
-      <span aria-hidden="true" style="width:1px;height:14px;background:rgba(200,212,230,.3);"></span>
-      <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(200,212,230,.74);">Del Lago Eagles · Swim</span>
+  <header style="position:relative;width:100%;max-width:1120px;margin:0 auto;padding:56px 24px 40px;display:flex;flex-wrap:wrap-reverse;align-items:center;justify-content:space-between;gap:24px 48px;">
+    <img src="./brand/vista-eagle-line.svg" alt="" aria-hidden="true" style="position:absolute;z-index:-1;top:-40px;left:-220px;width:min(820px,110vw);height:auto;opacity:.045;pointer-events:none;user-select:none;transform:scaleX(-1);">
+    <div style="flex:1 1 460px;min-width:0;">
+      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;margin-bottom:22px;">
+        <span aria-hidden="true" style="width:28px;height:1px;background:linear-gradient(90deg,#ffffff,#7f8da3);"></span>
+        <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(200,212,230,.74);">Vista del Lago High School</span>
+      </div>
+      <h1 style="margin:0;font-weight:300;font-size:clamp(48px,8vw,96px);letter-spacing:-.04em;line-height:1.02;padding-bottom:.05em;background:linear-gradient(180deg,#ffffff 35%,#b2bdcd);-webkit-background-clip:text;background-clip:text;color:transparent;">Eagles<br>Swim &amp; Dive</h1>
+      <p style="margin:20px 0 0;max-width:460px;font-size:16px;line-height:1.6;color:rgba(var(--ink, 238,242,248),.62);text-wrap:pretty;">Practice plans, meets, coaches, and gear for the 2027 season, all in one place.</p>
+      <div style="display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:8px 14px 8px 12px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),.07);border:1px solid rgba(var(--glass-rgb, 255,255,255),.12);font-size:13px;color:rgba(var(--ink, 238,242,248),.85);">
+        <span style="width:8px;height:8px;border-radius:50%;background:#7ec8f4;box-shadow:0 0 12px #7ec8f4;"></span>{{ status }}
+      </div>
     </div>
-    <h1 style="margin:0;font-weight:300;font-size:clamp(44px,7vw,84px);letter-spacing:-.035em;line-height:1.08;padding-bottom:.04em;background:linear-gradient(180deg,#ffffff 35%,#b2bdcd);-webkit-background-clip:text;background-clip:text;color:transparent;">JV Season Plan</h1>
-    <div style="margin-top:16px;font-size:15px;color:rgba(var(--ink, 238,242,248),.55);">Feb 8 – May 17, 2027</div>
-    <div aria-hidden="true" style="margin-top:28px;width:72px;height:2px;border-radius:2px;background:linear-gradient(90deg,#ffffff,#7f8da3 60%,transparent);"></div>
+    <div style="flex:0 1 360px;display:flex;justify-content:center;">
+      <img src="./brand/vista-logo.svg" alt="Vista Eagles logo" style="width:min(360px,62vw);height:auto;display:block;filter:drop-shadow(0 24px 60px rgba(0,32,78,.95)) drop-shadow(0 0 48px rgba(120,160,230,.14));">
+    </div>
   </header>
 
+  <main style="flex:1;width:100%;max-width:1120px;margin:0 auto;padding:0 24px 64px;display:flex;flex-direction:column;gap:40px;">
 
-  <main style="max-width:1120px;margin:0 auto;padding:24px 24px 40px;">
-    <sc-for list="{{ weeks }}" as="wk" hint-placeholder-count="6">
-      <div style="margin-bottom:10px;">
-        <sc-if value="{{ wk.hasDivider }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;align-items:center;gap:12px;margin:48px 0 20px;">
-            <span style="width:8px;height:8px;border-radius:50%;background:{{ wk.dividerColor }};"></span>
-            <span style="font-size:20px;font-weight:500;letter-spacing:-.01em;">{{ wk.dividerLabel }}</span>
-            <span style="flex:1;height:1px;background:rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));"></span>
-          </div>
-        </sc-if>
-        <div onClick="{{ wk.toggle }}" role="button" aria-expanded="{{ wk.isOpen }}" style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin:0 0 10px;padding:12px 16px;border-radius:16px;cursor:pointer;background:var(--frost, none), linear-gradient({{ wk.hdrBg }}, {{ wk.hdrBg }});border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf-frost, blur(30px) saturate(120%) brightness(var(--bd-b, .45)));-webkit-backdrop-filter:var(--glass-bf-frost, blur(30px) saturate(120%) brightness(var(--bd-b, .45)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));transition:background .45s ease, border-color .45s ease;" style-hover="border-color:rgba(var(--glass-rgb, 255,255,255),calc(.18 * var(--glass-k, 1)));">
-          <span style="font-size:14px;font-weight:500;">{{ wk.label }}</span>
-          <sc-if value="{{ wk.isCurrent }}" hint-placeholder-val="{{ false }}">
-            <span style="font-size:11px;font-weight:500;padding:3px 9px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),calc(.92 * var(--glass-k, 1)));color:#0a0f1c;">This week</span>
-          </sc-if>
-          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.45);">{{ wk.range }}</span>
-          <span style="font-size:12px;color:color-mix(in oklab, {{ wk.phaseColor }}, #000 var(--tint-dark, 0%));">{{ wk.badge }}</span>
-          <span style="margin-left:auto;font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.4);">{{ wk.avgText }}</span>
-          <span style="display:inline-block;font-size:14px;line-height:1;color:rgba(var(--ink, 238,242,248),.5);transition:transform .55s cubic-bezier(.33,1,.68,1);transform:{{ wk.chevron }};">⌄</span>
-        </div>
-        <div aria-hidden="{{ wk.hidden }}" inert="{{ wk.inert }}" style="display:grid;grid-template-rows:{{ wk.rows }};opacity:{{ wk.fade }};transform:{{ wk.shift }};transition:grid-template-rows .6s cubic-bezier(.33,1,.68,1), opacity .5s ease, transform .6s cubic-bezier(.33,1,.68,1);">
-          <div style="min-height:0;overflow:hidden;">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:8px;">
-          <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-            <sc-if value="{{ d.isOff }}" hint-placeholder-val="{{ false }}">
-              <div onClick="{{ d.open }}" style="border-radius:20px;padding:14px 16px;min-height:120px;border:1px dashed rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));cursor:pointer;">
-                <div style="font-family:'Geist Mono',monospace;font-size:11px;color:rgba(var(--ink, 238,242,248),.3);">{{ d.name }} · {{ d.date }}</div>
-                <div style="margin-top:10px;font-size:13px;color:rgba(var(--ink, 238,242,248),.3);">{{ d.title }}</div>
-              </div>
-            </sc-if>
-            <sc-if value="{{ d.isOn }}" hint-placeholder-val="{{ true }}">
-              <div onClick="{{ d.open }}" style="position:relative;border-radius:20px;padding:14px 16px 16px;min-height:120px;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--frost, none), radial-gradient(120% 80% at 0% 0%, rgba(var(--glass-rgb, 255,255,255),calc(.11 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(0 * var(--glass-k, 1))) 55%), linear-gradient(155deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))) 0%, rgba(var(--glass-rgb, 255,255,255),calc(.025 * var(--glass-k, 1))) 45%, rgba(var(--glass-rgb, 255,255,255),calc(.015 * var(--glass-k, 1))) 70%, rgba(var(--glass-rgb, 255,255,255),calc(.05 * var(--glass-k, 1))) 100%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 6px 20px rgba(0,0,0,.18);transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;" style-hover="transform:translateY(-3px);border-color:rgba(var(--glass-rgb, 255,255,255),calc(.22 * var(--glass-k, 1)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.16 * var(--glass-k, 1))), 0 14px 34px rgba(0,0,0,.35);">
-                <div style="display:flex;align-items:center;gap:8px;">
-                  <span style="width:7px;height:7px;border-radius:50%;background:{{ d.tint }};box-shadow:0 0 10px {{ d.tint }};"></span>
-                  <span style="font-family:'Geist Mono',monospace;font-size:11px;color:rgba(var(--ink, 238,242,248),.5);">{{ d.name }} · {{ d.date }}</span>
-                </div>
-                <div style="font-size:14px;font-weight:500;line-height:1.3;text-wrap:pretty;">{{ d.title }}</div>
-                <sc-if value="{{ d.showDetail }}" hint-placeholder-val="{{ true }}">
-                  <div style="font-size:12px;line-height:1.45;color:rgba(var(--ink, 238,242,248),.55);text-wrap:pretty;">{{ d.detail }}</div>
-                </sc-if>
-                <div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:6px;padding-top:4px;">
-                  <sc-if value="{{ d.showYds }}" hint-placeholder-val="{{ false }}">
-                    <span style="font-family:'Geist Mono',monospace;font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));color:rgba(var(--ink, 238,242,248),.7);">{{ d.ydsText }}</span>
-                  </sc-if>
-                  <sc-if value="{{ d.hasNote }}" hint-placeholder-val="{{ false }}">
-                    <span style="font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(255,204,102,.1);color:color-mix(in oklab, #ffd37a, #000 var(--tint-dark, 0%));">{{ d.note }}</span>
-                  </sc-if>
-                </div>
-              </div>
-            </sc-if>
-          </sc-for>
-        </div>
-        </div>
-        </div>
-      </div>
-    </sc-for>
-  </main>
+    <sc-if value="{{ hasUpNext }}" hint-placeholder-val="{{ true }}">
+      <section aria-label="Up next" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;">
+        <sc-for list="{{ upNext }}" as="u" hint-placeholder-count="2">
+          <a href="jv.html" style="display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:20px;background:var(--frost, none), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.02 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));transition:border-color .2s ease, transform .2s ease;" style-hover="border-color:rgba(var(--glass-rgb, 255,255,255),.28);transform:translateY(-2px);">
+            <span style="flex-shrink:0;width:44px;height:44px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(var(--glass-rgb, 255,255,255),.07);border:1px solid rgba(var(--glass-rgb, 255,255,255),.1);">
+              <span style="font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:.08em;color:{{ u.color }};">{{ u.mon }}</span>
+              <span style="font-size:17px;font-weight:500;line-height:1.1;">{{ u.day }}</span>
+            </span>
+            <span style="display:flex;flex-direction:column;gap:3px;min-width:0;">
+              <span style="font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:{{ u.color }};">{{ u.label }}</span>
+              <span style="font-size:16px;font-weight:500;line-height:1.3;">{{ u.title }}</span>
+              <span style="font-size:13px;line-height:1.4;color:rgba(var(--ink, 238,242,248),.55);">{{ u.note }}</span>
+            </span>
+          </a>
+        </sc-for>
+      </section>
+    </sc-if>
 
-  <sc-if value="{{ showLegend }}" hint-placeholder-val="{{ true }}">
-    <section style="max-width:1120px;margin:0 auto;padding:0 24px 40px;">
-      <div style="border-radius:24px;background:var(--frost, none), linear-gradient(rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));overflow:hidden;">
-        <button onClick="{{ toggleKey }}" aria-expanded="{{ keyOpen }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px;background:none;border:none;color:rgb(var(--ink, 238,242,248));font-family:inherit;font-size:15px;font-weight:500;cursor:pointer;text-align:left;" style-hover="background:rgba(var(--glass-rgb, 255,255,255),calc(.03 * var(--glass-k, 1)));">
-          <span>Key</span>
-          <span style="display:inline-block;font-size:14px;color:rgba(var(--ink, 238,242,248),.5);transition:transform .25s ease;transform:{{ keyChevron }};">⌄</span>
-        </button>
-        <sc-if value="{{ keyOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 24px 22px;">
-            <sc-for list="{{ legend }}" as="l" hint-placeholder-count="12">
-              <div style="display:flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:999px;background:rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));font-size:12px;color:rgba(var(--ink, 238,242,248),.7);">
-                <span style="width:7px;height:7px;border-radius:50%;background:{{ l.color }};box-shadow:0 0 8px {{ l.color }};"></span>{{ l.label }}
-              </div>
-            </sc-for>
-          </div>
-        </sc-if>
+    <section aria-label="Explore the site">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px;">
+        <a href="jv.html" style="position:relative;display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px;border-radius:24px;overflow:hidden;background:var(--frost, none), radial-gradient(90% 70% at 100% 0%, rgba(126,200,244,.22), transparent 60%), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.02 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px);border-color:rgba(126,200,244,.5);box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),.14), 0 20px 44px rgba(0,0,0,.4);">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;color:#7ec8f4;">01 · JV</span>
+          <span style="font-size:26px;font-weight:400;letter-spacing:-.02em;line-height:1.15;">JV Season Plan</span>
+          <span style="font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.62);text-wrap:pretty;">Daily practices, dual meets, and the build to League Champs.</span>
+          <span style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:rgba(var(--ink, 238,242,248),.85);">Open plan<span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(126,200,244,.16);color:#cfeafc;">→</span></span>
+        </a>
+        <a href="varsity.html" style="position:relative;display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px;border-radius:24px;overflow:hidden;background:var(--frost, none), radial-gradient(90% 70% at 100% 0%, rgba(180,156,245,.22), transparent 60%), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.02 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px);border-color:rgba(180,156,245,.55);box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),.14), 0 20px 44px rgba(0,0,0,.4);">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;color:#c4b2f8;">02 · Varsity</span>
+          <span style="font-size:26px;font-weight:400;letter-spacing:-.02em;line-height:1.15;">Varsity Season Plan</span>
+          <span style="font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.62);text-wrap:pretty;">The varsity calendar, from tryouts through Sections and State.</span>
+          <span style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:rgba(var(--ink, 238,242,248),.85);">Open plan<span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(180,156,245,.18);color:#e4dafd;">→</span></span>
+        </a>
+        <a href="coaches.html" style="position:relative;display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px;border-radius:24px;overflow:hidden;background:var(--frost, none), radial-gradient(90% 70% at 100% 0%, rgba(92,230,160,.18), transparent 60%), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.02 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px);border-color:rgba(92,230,160,.5);box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),.14), 0 20px 44px rgba(0,0,0,.4);">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;color:#5ce6a0;">03 · Staff</span>
+          <span style="font-size:26px;font-weight:400;letter-spacing:-.02em;line-height:1.15;">Coaches</span>
+          <span style="font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.62);text-wrap:pretty;">Meet the Eagles swim staff.</span>
+          <span style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:rgba(var(--ink, 238,242,248),.85);">Meet the coaches<span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(92,230,160,.16);color:#d2f8e5;">→</span></span>
+        </a>
+        <a href="equipment.html" style="position:relative;display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px;border-radius:24px;overflow:hidden;background:var(--frost, none), radial-gradient(90% 70% at 100% 0%, rgba(255,176,122,.2), transparent 60%), linear-gradient(160deg, rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.02 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1))), 0 10px 30px rgba(0,0,0,.25);transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;" style-hover="transform:translateY(-4px);border-color:rgba(255,176,122,.55);box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),.14), 0 20px 44px rgba(0,0,0,.4);">
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;color:#ffb07a;">04 · Gear</span>
+          <span style="font-size:26px;font-weight:400;letter-spacing:-.02em;line-height:1.15;">Equipment</span>
+          <span style="font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.62);text-wrap:pretty;">Daily essentials, training gear, and what to pack for meet day.</span>
+          <span style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500;color:rgba(var(--ink, 238,242,248),.85);">See the list<span aria-hidden="true" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,176,122,.18);color:#ffe3cf;">→</span></span>
+        </a>
       </div>
     </section>
-  </sc-if>
 
-  <footer style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:48px 24px 44px;margin-top:8px;border-top:1px solid rgba(var(--glass-rgb, 255,255,255),.06);">
-    <img src="./brand/vista-logo.svg" alt="Vista Eagles" style="width:132px;height:auto;display:block;filter:drop-shadow(0 8px 28px rgba(0,32,78,.9));">
-    <div style="text-align:center;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,212,230,.62);">Vista del Lago Eagles · JV Swim · 2027 Season Planner</div>
-  </footer>
-
-  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;display:flex;align-items:flex-start;justify-content:center;padding:64px 16px 40px;overflow-y:auto;background:rgba(var(--scrim-rgb, 5,8,18),.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);">
-      <div onClick="{{ stop }}" role="dialog" aria-modal="true" style="position:relative;width:100%;max-width:620px;padding:32px;border-radius:28px;background:var(--frost, none), linear-gradient(160deg, {{ m.tintBg }}, rgba(var(--panel-rgb, 20,26,44),.72) 50%);border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.14 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf-strong, blur(36px) saturate(130%) brightness(var(--bd-b, .5)));-webkit-backdrop-filter:var(--glass-bf-strong, blur(36px) saturate(130%) brightness(var(--bd-b, .5)));box-shadow:inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.14 * var(--glass-k, 1))), 0 30px 80px rgba(0,0,0,.5);">
-        <button onClick="{{ close }}" aria-label="Close" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.12 * var(--glass-k, 1)));background:rgba(var(--glass-rgb, 255,255,255),calc(.06 * var(--glass-k, 1)));color:rgb(var(--ink, 238,242,248));font-size:18px;line-height:1;cursor:pointer;" style-hover="background:rgba(var(--glass-rgb, 255,255,255),calc(.14 * var(--glass-k, 1)));">×</button>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="width:8px;height:8px;border-radius:50%;background:{{ m.tint }};box-shadow:0 0 10px {{ m.tint }};"></span>
-          <span style="font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.55);">{{ m.dayName }} · {{ m.date }}, 2027</span>
+    <sc-if value="{{ hasMilestones }}" hint-placeholder-val="{{ true }}">
+      <section aria-label="Season at a glance" style="border-radius:24px;padding:22px 24px 24px;background:var(--frost, none), linear-gradient(rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1))), rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1))));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));-webkit-backdrop-filter:var(--glass-bf, blur(26px) saturate(130%) brightness(var(--bd-b, .55)));">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;margin-bottom:20px;">
+          <h2 style="margin:0;font-size:18px;font-weight:500;letter-spacing:-.01em;">Season at a glance</h2>
+          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:rgba(200,212,230,.6);">Feb 8 – May 17, 2027</span>
         </div>
-        <h2 style="margin:14px 0 8px;font-size:32px;font-weight:400;letter-spacing:-.025em;line-height:1.1;padding-right:40px;">{{ m.title }}</h2>
-        <sc-if value="{{ m.hasDetail }}" hint-placeholder-val="{{ false }}">
-          <div style="font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.6);">{{ m.detail }}</div>
-        </sc-if>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;">
-          <sc-for list="{{ m.sections }}" as="s" hint-placeholder-count="0">
-            <div style="padding:16px 18px;border-radius:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.05 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
-                <span style="width:6px;height:6px;border-radius:50%;background:{{ s.color }};"></span>
-                <span style="font-size:13px;font-weight:500;color:color-mix(in oklab, {{ s.color }}, #000 var(--tint-dark, 0%));">{{ s.label }}</span>
-                <span style="margin-left:auto;font-family:'Geist Mono',monospace;font-size:11px;color:rgba(var(--ink, 238,242,248),.45);">{{ s.yds }}</span>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:6px;">
-                <sc-for list="{{ s.sets }}" as="set" hint-placeholder-count="3">
-                  <div style="font-size:14px;line-height:1.5;color:rgba(var(--ink, 238,242,248),.85);">{{ set }}</div>
-                </sc-for>
-              </div>
-            </div>
-          </sc-for>
-          <sc-if value="{{ m.hasNotes }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:16px 18px;border-radius:18px;background:rgba(255,204,102,.07);border:1px solid rgba(255,204,102,.16);">
-              <div style="font-size:12px;font-weight:500;color:color-mix(in oklab, #ffd37a, #000 var(--tint-dark, 0%));margin-bottom:6px;">Coach's Note</div>
-              <div style="font-size:14px;line-height:1.55;color:color-mix(in oklab, rgba(255,228,170,.9), #000 var(--tint-dark, 0%));">{{ m.notes }}</div>
-            </div>
-          </sc-if>
-          <sc-if value="{{ m.hasEmpty }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:20px 18px;border-radius:18px;background:rgba(var(--glass-rgb, 255,255,255),calc(.04 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.07 * var(--glass-k, 1)));font-size:14px;line-height:1.55;color:rgba(var(--ink, 238,242,248),.7);">{{ m.empty }}</div>
-          </sc-if>
-        </div>
-        <sc-if value="{{ m.hasTotal }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;justify-content:space-between;margin-top:20px;padding:0 4px;font-family:'Geist Mono',monospace;font-size:12px;color:rgba(var(--ink, 238,242,248),.6);">
-            <span>{{ m.totalLabel }}</span><span>{{ m.total }}</span>
+        <div style="overflow-x:auto;padding-bottom:4px;">
+          <div style="position:relative;min-width:max-content;">
+          <span aria-hidden="true" style="position:absolute;left:6px;right:6px;top:6px;height:1px;background:linear-gradient(90deg, rgba(200,212,230,.35), rgba(200,212,230,.12));"></span>
+          <ol style="position:relative;display:flex;margin:0;padding:0;list-style:none;">
+            <sc-for list="{{ milestones }}" as="m" hint-placeholder-count="7">
+              <li style="position:relative;width:148px;flex:none;display:flex;flex-direction:column;gap:6px;padding-right:12px;opacity:{{ m.opacity }};">
+                <span style="width:13px;height:13px;border-radius:50%;background:{{ m.color }};box-shadow:{{ m.ring }};"></span>
+                <span style="margin-top:6px;font-size:14px;font-weight:500;">{{ m.label }}</span>
+                <span style="font-family:'Geist Mono',monospace;font-size:12px;color:rgba(200,212,230,.7);">{{ m.date }}</span>
+                <sc-if value="{{ m.isNext }}" hint-placeholder-val="{{ false }}">
+                  <span style="align-self:flex-start;margin-top:2px;font-size:10px;font-weight:500;letter-spacing:.06em;padding:2px 8px;border-radius:999px;background:linear-gradient(180deg,#ffffff,#c3ccd9);color:#00204e;">UP NEXT</span>
+                </sc-if>
+              </li>
+            </sc-for>
+          </ol>
           </div>
-        </sc-if>
-      </div>
-    </div>
-  </sc-if>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+
+  <footer style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:32px 24px 40px;border-top:1px solid rgba(var(--glass-rgb, 255,255,255),.06);">
+    <div style="text-align:center;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,212,230,.62);">Vista del Lago Eagles · Swim &amp; Dive · 2027 Season</div>
+  </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;showDetails&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;},&quot;showLegend&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Display&quot;}}">
+<script type="text/x-dc" data-dc-script data-props='{}'>
 const TINT = {
   tryout:'#b8cce8', tech:'#7ec8f4', build:'#5ce6a0', refine:'#f9a55a', taper:'#ffb07a',
   ff:'#d0dce8', meet:'#ff6b8e', champs:'#b49cf5', bprac:'#8fa6c4', bye:'#8a96aa',
   secprac:'#b07ae8', sections:'#c77dff', state:'#ff7070', banquet:'#6ee87c', off:'#556',
 };
-const PHASE = { tryout:'#b8cce8', tech:'#7ec8f4', build:'#5ce6a0', refine:'#f9a55a', taper:'#ffb07a', post:'#c8b0f0' };
-const LEGEND = [
-  ['Tryout','tryout'],['Technique','tech'],['Build','build'],['Refine','refine'],['Taper','taper'],
-  ['🎉 Fun Friday','ff'],['Dual Meet','meet'],['League Champs','champs'],['Spring Break Practice','bprac'],
-  ['Sections','sections'],['State Meet','state'],['Banquet','banquet'],
-];
-const hexA = (hex, a) => {
-  const h = hex.replace('#','');
-  const f = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
-  const n = parseInt(f, 16);
-  return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;
-};
-const NO_YDS = ['meet','champs','sections','state','banquet','off'];
-// Workouts stay hidden until the day of that practice (swimmer's local date).
+// Same reveal rules as the season plans: future workouts stay hidden until practice day.
 const NOT_PRACTICE = ['off','meet','champs','sections','state','banquet'];
-const startOfToday = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
-const dayDate = (wk, di) => { const p = new Date(wk.mon); p.setDate(p.getDate() + di); p.setHours(0,0,0,0); return p; };
-const isLocked = (wk, di, day) => !NOT_PRACTICE.includes(day.t) && dayDate(wk, di) > startOfToday();
-// Before practice day: training-phase days show a generic title and no focus line.
+const MEETS = ['meet','champs','sections','state'];
 const MASK_TITLE = ['tech','build','refine','taper'];
-const shownDay = (day, locked) => locked
-  ? { title: MASK_TITLE.includes(day.t) ? 'Standard Practice' : day.title, detail: day.t === 'bprac' ? 'Optional' : '' }
-  : { title: day.title, detail: day.detail };
+const startOfToday = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
+const longDate = d => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 
 class Component extends DCLogic {
-  state = { sel: null, ready: !!window.SEASON, keyOpen: false, openWeeks: null };
+  state = { ready: !!window.SEASON };
   componentDidMount() {
     if (!window.SEASON) this._t = setInterval(() => { if (window.SEASON) { clearInterval(this._t); this.setState({ ready: true }); } }, 50);
-    this._key = e => { if (e.key === 'Escape') this.setState({ sel: null }); };
-    document.addEventListener('keydown', this._key);
   }
-  componentWillUnmount() { clearInterval(this._t); document.removeEventListener('keydown', this._key); }
-  open(wi, di) { this.setState({ sel: [wi, di] }); document.body.style.overflow = 'hidden'; }
-  close = () => { this.setState({ sel: null }); document.body.style.overflow = ''; };
+  componentWillUnmount() { clearInterval(this._t); }
 
-  buildModal(S) {
-    const [wi, di] = this.state.sel;
-    const wk = S.weeks[wi], day = wk.days[di], yds = wk.yds[di], w = day.workout;
-    const tint = TINT[day.t] || TINT.off;
-    const pDate = dayDate(wk, di);
-    const locked = isLocked(wk, di, day);
-    const shown = shownDay(day, locked);
-    const m = {
-      tint, tintBg: hexA(tint, .16), dayName: S.DAYS[di], date: S.weekDates(wk.mon)[di],
-      title: shown.title || 'No Practice', detail: shown.detail, hasDetail: !!shown.detail,
-      sections: [], hasNotes: false, notes: '', hasEmpty: false, empty: '', hasTotal: false, total: '', totalLabel: '',
+  card(x, label, title, note) {
+    return {
+      label, title, note, color: TINT[x.day.t] || '#7ec8f4',
+      mon: x.date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
+      day: String(x.date.getDate()),
     };
-    if (locked) {
-      m.hasEmpty = true;
-      m.empty = `🔒 Workout unlocks ${pDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}. Check back on practice day!`;
-      if (yds) { m.hasTotal = true; m.totalLabel = 'Planned yardage'; m.total = `${yds.toLocaleString()} yds`; }
-    } else if (w && (w.warmup || w.mainSet || w.cooldown || w.activity)) {
-      [['Warmup','warmup','#7ec8f4'],['Main Set','mainSet','#5ce6a0'],['Cooldown','cooldown','#c8b0f0'],['Activity','activity','#ffb07a']]
-        .forEach(([label, k, color]) => { const s = w[k]; if (s) m.sections.push({ label, color, yds: s.distance ? `${s.distance.toLocaleString()} yds` : '', sets: s.sets || [] }); });
-      if (w.notes) { m.hasNotes = true; m.notes = w.notes; }
-      if (yds) { m.hasTotal = true; m.totalLabel = 'Total yardage'; m.total = `${yds.toLocaleString()} yds`; }
-    } else {
-      m.hasEmpty = true;
-      if (day.t === 'off') m.empty = 'Rest day — no practice scheduled.';
-      else if (['meet','champs','sections','state'].includes(day.t)) m.empty = 'Meet day! See coach for warmup time, lineup, and event order.';
-      else if (day.t === 'banquet') m.empty = 'Team banquet — celebration time!';
-      else if (day.t === 'bye') m.empty = 'Bye week — no meet scheduled.';
-      else if (!day.title) m.empty = 'Nothing scheduled.';
-      else {
-        m.empty = "Coach hasn't posted this workout yet — check back soon!";
-        if (yds) { m.hasTotal = true; m.totalLabel = 'Planned yardage'; m.total = `${yds.toLocaleString()} yds`; }
-      }
-    }
-    return m;
   }
 
   renderVals() {
     const S = window.SEASON;
-    const base = {
-      showLegend: this.props.showLegend ?? true,
-      showDetails: this.props.showDetails ?? true,
-      showArc: this.props.showYardageArc ?? true,
-      legend: LEGEND.map(([label, t]) => ({ label, color: TINT[t] })),
-      close: this.close, stop: e => e.stopPropagation(),
-      keyOpen: this.state.keyOpen, keyChevron: this.state.keyOpen ? 'rotate(180deg)' : 'none',
-      toggleKey: () => this.setState(s => ({ keyOpen: !s.keyOpen })),
-      modalOpen: false, m: {}, weeks: [], bars: [],
-    };
+    const base = { status: '2027 season · Feb 8 – May 17', hasUpNext: false, upNext: [], hasMilestones: false, milestones: [] };
     if (!S) return base;
-    const MAX = 4000;
-    const bars = [];
     const today = startOfToday();
-    let curWi = S.weeks.findIndex(wk => { const end = new Date(wk.mon); end.setDate(end.getDate() + 7); return today >= wk.mon && today < end; });
-    const inSeason = curWi >= 0;
-    if (curWi < 0) curWi = 0; // outside the season: open week 1
-    const open = this.state.openWeeks || { [curWi]: true };
-    const toggleWeek = wi => this.setState(s => { const o = { ...(s.openWeeks || { [curWi]: true }) }; o[wi] = !o[wi]; return { openWeeks: o }; });
-    const weeks = S.weeks.map((wk, wi) => {
-      const dates = S.weekDates(wk.mon);
-      const prac = wk.yds.filter(y => y !== null);
-      const avg = prac.length ? Math.round(prac.reduce((a, b) => a + b, 0) / prac.length) : null;
-      const d4 = new Date(wk.mon); d4.setDate(d4.getDate() + 4);
-      const div = S.dividers[wk.wk];
-      if (typeof wk.wk === 'number') bars.push({ label: `W${wk.wk}`, pct: `${avg ? (avg / MAX) * 100 : 4}%`, color: PHASE[wk.phase], title: avg ? `~${avg.toLocaleString()} yds avg` : '' });
-      return {
-        label: typeof wk.wk === 'number' ? `Week ${wk.wk}` : wk.wk,
-        range: `${S.fmt(wk.mon)} – ${S.fmt(d4)}`,
-        badge: wk.badge, phaseColor: PHASE[wk.phase],
-        avgText: avg ? `~${avg.toLocaleString()} yds avg` : '',
-        isCurrent: inSeason && wi === curWi, isOpen: !!open[wi], rows: open[wi] ? '1fr' : '0fr', fade: open[wi] ? 1 : 0, shift: open[wi] ? 'none' : 'translateY(-6px)', hidden: open[wi] ? 'false' : 'true', inert: open[wi] ? undefined : '', chevron: open[wi] ? 'rotate(180deg)' : 'none',
-        hdrBg: open[wi] ? 'rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)))' : 'rgba(var(--glass-rgb, 255,255,255),calc(.065 * var(--glass-k, 1)))', toggle: () => toggleWeek(wi),
-        hasDivider: !!div, dividerLabel: div ? div.label.replace(/—/g, '').trim() : '', dividerColor: PHASE[wk.phase === 'tryout' ? 'tech' : wk.phase],
-        days: wk.days.map((day, di) => {
-          const yds = wk.yds[di];
-          const tint = TINT[day.t] || TINT.off;
-          const isOff = day.t === 'off';
-          const shown = shownDay(day, isLocked(wk, di, day));
-          return {
-            name: S.DAYS[di], date: dates[di], title: shown.title, detail: shown.detail,
-            showDetail: (this.props.showDetails ?? true) && !!shown.detail,
-            isOff, isOn: !isOff, tint, tintBg: hexA(tint, .14),
-            showYds: yds !== null && !NO_YDS.includes(day.t), ydsText: yds ? `${yds.toLocaleString()} yds` : '',
-            hasNote: !!day.note, note: day.note || '',
-            open: () => this.open(wi, di),
-          };
-        }),
-      };
-    });
-    return { ...base, weeks, bars, modalOpen: !!this.state.sel, m: this.state.sel ? this.buildModal(S) : {} };
+    const days = [];
+    S.weeks.forEach(wk => wk.days.forEach((day, di) => {
+      const date = new Date(wk.mon); date.setDate(date.getDate() + di); date.setHours(0,0,0,0);
+      days.push({ wk, day, date });
+    }));
+    const first = days[0].date;
+    const banquet = days.find(x => x.day.t === 'banquet');
+    const end = banquet ? banquet.date : days[days.length - 1].date;
+
+    let status;
+    if (today < first) {
+      const n = Math.round((first - today) / 864e5);
+      status = `Season starts ${longDate(first)} · ${n} day${n === 1 ? '' : 's'} to go`;
+    } else if (today > end) {
+      status = '2027 season complete · Fly Eagles Fly';
+    } else {
+      const wk = S.weeks.find(w => { const e = new Date(w.mon); e.setDate(e.getDate() + 7); return today >= w.mon && today < e; });
+      status = !wk ? 'In season' : typeof wk.wk === 'number' ? `This week · Week ${wk.wk} · ${wk.badge}` : `This week · ${wk.badge}`;
+    }
+
+    const upNext = [];
+    const np = days.find(x => !NOT_PRACTICE.includes(x.day.t) && x.day.title && x.date >= today);
+    if (np) {
+      const isToday = +np.date === +today;
+      const title = !isToday && MASK_TITLE.includes(np.day.t) ? 'Standard Practice' : np.day.title;
+      upNext.push(this.card(np, isToday ? 'Today' : 'Next practice', title, isToday ? (np.day.detail || longDate(np.date)) : `${longDate(np.date)} · workout unlocks that day`));
+    }
+    const nm = days.find(x => MEETS.includes(x.day.t) && x.date >= today);
+    if (nm) upNext.push(this.card(nm, +nm.date === +today ? 'Meet day' : 'Next meet', nm.day.title, nm.day.detail || longDate(nm.date)));
+
+    const firstOf = pred => days.find(pred);
+    const ms = [
+      ['Tryouts', firstOf(x => x.day.t === 'tryout'), 'tryout'],
+      ['Build Phase', firstOf(x => x.wk.phase === 'build'), 'build'],
+      ['Spring Break', firstOf(x => x.day.t === 'bprac'), 'bprac'],
+      ['League Champs', firstOf(x => x.day.t === 'champs'), 'champs'],
+      ['Sections', firstOf(x => x.day.t === 'sections'), 'sections'],
+      ['State', firstOf(x => x.day.t === 'state'), 'state'],
+      ['Banquet', banquet, 'banquet'],
+    ].filter(m => m[1]);
+    const nextIdx = ms.findIndex(m => m[1].date >= today);
+    const milestones = ms.map(([label, x, t], i) => ({
+      label, date: S.fmt(x.date), color: TINT[t],
+      opacity: nextIdx < 0 || i < nextIdx ? .45 : 1,
+      isNext: i === nextIdx,
+      ring: i === nextIdx ? `0 0 0 4px color-mix(in srgb, ${TINT[t]} 30%, transparent), 0 0 14px ${TINT[t]}` : 'none',
+    }));
+
+    return { ...base, status, upNext, hasUpNext: upNext.length > 0, milestones, hasMilestones: milestones.length > 0 };
   }
 }
 </script>
