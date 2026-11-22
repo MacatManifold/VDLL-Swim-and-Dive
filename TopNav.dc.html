@@ -8,7 +8,7 @@
 <body>
 <x-dc>
 <nav style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;max-width:1168px;margin:0 auto;padding:{{ navPad }};">
-  <a href="index.html" aria-label="Vista Eagles Swim home" style="display:flex;align-items:center;gap:10px;height:{{ brandH }};padding:{{ brandPad }};border-radius:999px;text-decoration:none;background:rgba(var(--glass-rgb, 255,255,255),calc(.06 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:blur(30px) saturate(120%) brightness(var(--bd-b, .45));-webkit-backdrop-filter:blur(30px) saturate(120%) brightness(var(--bd-b, .45));box-shadow:0 8px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));" style-hover="border-color:rgba(var(--glass-rgb, 255,255,255),calc(.3 * var(--glass-k, 1)));">
+  <a href="./" aria-label="Vista Eagles Swim home" style="display:flex;align-items:center;gap:10px;height:{{ brandH }};padding:{{ brandPad }};border-radius:999px;text-decoration:none;background:rgba(var(--glass-rgb, 255,255,255),calc(.06 * var(--glass-k, 1)));border:1px solid rgba(var(--glass-rgb, 255,255,255),calc(.1 * var(--glass-k, 1)));backdrop-filter:blur(30px) saturate(120%) brightness(var(--bd-b, .45));-webkit-backdrop-filter:blur(30px) saturate(120%) brightness(var(--bd-b, .45));box-shadow:0 8px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(var(--glass-rgb, 255,255,255),calc(.08 * var(--glass-k, 1)));" style-hover="border-color:rgba(var(--glass-rgb, 255,255,255),calc(.3 * var(--glass-k, 1)));">
     <img src="./brand/vista-eagle.svg" alt="" style="height:{{ eagleH }};width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));">
     <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
       <span style="display:flex;flex-direction:column;gap:4px;">
@@ -27,10 +27,10 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;80px&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;JV&quot;,&quot;Varsity&quot;,&quot;Coaches&quot;,&quot;Equipment&quot;],&quot;default&quot;:&quot;JV&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 const LINKS = [
-  ['JV', 'jv.html'],
-  ['Varsity', 'varsity.html'],
-  ['Coaches', 'coaches.html'],
-  ['Equipment', 'equipment.html'],
+  ['JV', 'jv'],
+  ['Varsity', 'varsity'],
+  ['Coaches', 'coaches'],
+  ['Equipment', 'equipment'],
 ];
 class Component extends DCLogic {
   refs = LINKS.map(() => React.createRef());

@@ -4,8 +4,8 @@
 (function () {
   if (window.__speed) return;
   window.__speed = true;
-  var PAGES = ['index.html', 'jv.html', 'varsity.html', 'coaches.html', 'equipment.html'];
-  var here = location.pathname.split('/').pop() || 'index.html';
+  var PAGES = ['./', 'jv', 'varsity', 'coaches', 'equipment']; // same URLs the nav links use, so the cache gets hit
+  var here = (location.pathname.split('/').pop() || '').replace(/\.html$/, '').replace(/^index$/, '') || './';
   var others = PAGES.filter(function (p) { return p !== here; });
   var conn = navigator.connection;
   if (conn && conn.saveData) return;
