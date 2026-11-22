@@ -19,6 +19,7 @@
   var NAV_HOST = '#dc-root [data-ripple-host] > .sc-host';
   var PILL = ':scope > div > div', TABS = ':scope > div > a'; // inside TopNav's <nav>
   var INK_OFF = 'rgba(var(--ink, 238,242,248),.72)', INK_ON = '#00204e'; // tab label colors, as in TopNav
+  var HOME_INK_ON = 'rgba(0,32,78,.8)', HOME_INK_OFF = 'rgba(200,212,230,.75)'; // logo capsule label, as in TopNav
 
   var css = document.createElement('style');
   css.textContent =
@@ -147,7 +148,13 @@
     var tabs = [].slice.call(nav.querySelectorAll(TABS)), pill = nav.querySelector(PILL);
     var liveTabs = [].slice.call(measureFrom.querySelectorAll(TABS));
     if (!pill) return;
-    if (live) [pill].concat(tabs).forEach(function (el) { undo.push([el, el.getAttribute('style') || '']); });
+    // Logo capsule: lit on Home, plain everywhere else.
+    var home = dest === 'index', sel = function (q) { return [].slice.call(nav.querySelectorAll(q)); };
+    var brand = sel('[data-home-on]').concat(sel('[data-home-off]'), sel('[data-home-ink]'));
+    if (live) [pill].concat(tabs, brand).forEach(function (el) { undo.push([el, el.getAttribute('style') || '']); });
+    sel('[data-home-on]').forEach(function (el) { el.style.opacity = home ? '1' : '0'; });
+    sel('[data-home-off]').forEach(function (el) { el.style.opacity = home ? '0' : '1'; });
+    sel('[data-home-ink]').forEach(function (el) { el.style.color = home ? HOME_INK_ON : HOME_INK_OFF; });
     var hit = -1;
     tabs.forEach(function (a, i) { var on = a.getAttribute('href') === dest; if (on) hit = i; a.style.color = on ? INK_ON : INK_OFF; });
     var shown = pill.style.opacity === '1';
