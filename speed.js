@@ -1,5 +1,5 @@
 // Warms up the other pages so tab switches don't start from zero.
-// Chrome/Edge: speculation rules (prefetch right away, prerender on hover / touch).
+// Chrome/Edge: speculation rules prefetch.
 // Safari/Firefox: quietly fetch the pages into the HTTP cache once this page is idle.
 (function () {
   if (window.__speed) return;
@@ -15,7 +15,6 @@
     s.type = 'speculationrules';
     s.textContent = JSON.stringify({
       prefetch: [{ urls: others, eagerness: 'immediate' }],
-      prerender: [{ urls: others, eagerness: 'moderate' }],
     });
     document.head.appendChild(s);
     return;
