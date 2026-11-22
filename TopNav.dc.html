@@ -25,9 +25,9 @@
   </div>
 </nav>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;80px&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;JV&quot;,&quot;Varsity&quot;,&quot;Coaches&quot;,&quot;Equipment&quot;],&quot;default&quot;:&quot;JV&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;80px&quot;},&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Home&quot;,&quot;JV&quot;,&quot;Varsity&quot;,&quot;Coaches&quot;,&quot;Equipment&quot;],&quot;default&quot;:&quot;JV&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 const LINKS = [
-  ['JV', 'index.html'],
+  ['JV', 'jv.html'],
   ['Varsity', 'varsity.html'],
   ['Coaches', 'coaches.html'],
   ['Equipment', 'equipment.html'],
@@ -35,10 +35,10 @@ const LINKS = [
 class Component extends DCLogic {
   refs = LINKS.map(() => React.createRef());
   state = { cur: null, left: 0, width: 0, animate: false, shown: false, vw: window.innerWidth || 1024 };
-  activeIndex() { return Math.max(0, LINKS.findIndex(([l]) => l === (this.props.active ?? 'JV'))); }
+  activeIndex() { return LINKS.findIndex(([l]) => l === (this.props.active ?? 'JV')); } // -1 on the landing page: no tab highlighted
   measure(i) { const el = this.refs[i].current; return el ? { left: el.offsetLeft, width: el.offsetWidth } : null; }
   componentDidMount() {
-    const place = () => { const i = this.state.cur ?? this.activeIndex(); const m = this.measure(i); if (m) this.setState({ ...m, cur: i, shown: true }); };
+    const place = () => { const i = this.state.cur ?? this.activeIndex(); if (i < 0) { if (this.state.shown) this.setState({ shown: false }); return; } const m = this.measure(i); if (m) this.setState({ ...m, cur: i, shown: true }); };
     place();
     if (document.fonts) document.fonts.ready.then(place);
     this._rs = () => this.setState({ vw: window.innerWidth }, place);
@@ -53,7 +53,8 @@ class Component extends DCLogic {
     const href = LINKS[i][1];
     if (i === this.state.cur) return;
     const m = this.measure(i);
-    this.setState({ ...m, cur: i, animate: true });
+    const from = this.state.cur ?? this.activeIndex();
+    this.setState({ ...m, cur: i, animate: from >= 0, shown: true });
     clearTimeout(this._t);
     this._t = setTimeout(() => { window.location.href = href; }, 380);
   }
