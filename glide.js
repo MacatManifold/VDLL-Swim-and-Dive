@@ -6,7 +6,7 @@
   window.__glide = true;
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var ORDER = ['index.html', 'jv.html', 'varsity.html', 'coaches.html', 'equipment.html']; // left → right, same as the nav
+  var ORDER = ['index', 'jv', 'varsity', 'coaches', 'equipment']; // left → right, same as the nav
   var MS = 380;            // matches the pill's glide in TopNav
   var KEY = 'vdl-glide';
   var root = document.documentElement;
@@ -23,7 +23,7 @@
     'html[data-glide="out"] ' + CONTENT + '{animation:glide-out ' + MS + 'ms cubic-bezier(.65,0,.85,.45) forwards;pointer-events:none;}';
   document.head.appendChild(css);
 
-  var pageOf = function (path) { return path.split('/').pop() || 'index.html'; };
+  var pageOf = function (path) { return (path.split('/').pop() || 'index').replace(/\.html$/, ''); }; // /jv and /jv.html are the same page
   var here = pageOf(location.pathname);
   var clear = function () { root.removeAttribute('data-glide'); };
   var store = {
