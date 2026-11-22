@@ -3,25 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="icon" type="image/svg+xml" href="brand/vista-eagle.svg">
 <title>Coaches — Vista del Lago Eagles Swim</title>
+<link rel="icon" type="image/svg+xml" href="brand/vista-eagle.svg">
+<!-- Everything the page needs is listed here so the browser fetches it all at once, in parallel. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="./theme.js"></script>
-<script src="./ripple-bg.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="preload" href="./TopNav.dc.html" as="fetch" crossorigin>
 <style>
+x-dc{display:none;}
 html,body{margin:0;padding:0;background:var(--page-base,#000);}
 body{font-family:'Geist',system-ui,sans-serif;color:rgb(var(--ink, 238,242,248));-webkit-font-smoothing:antialiased;}
 *{box-sizing:border-box;}
 a{color:#cfe0f5;text-decoration:none;}
 a:hover{color:#ffffff;}
 </style>
-</helmet>
+<script src="./theme.js"></script>
+<script src="./vendor/react.production.min.js"></script>
+<script src="./vendor/react-dom.production.min.js"></script>
+<!-- The runtime normally re-downloads this page and renders it a second time. That second pass only matters for
+     templates using <table>/<select> or camelCase attributes other than on* handlers; delete this line if a page ever needs those. -->
+<script>window.__resources = window.__resources || {};</script>
+<script src="./support.js"></script>
+<script src="./ripple-bg.js" defer></script>
+<script src="./speed.js" defer></script>
+</head>
+<body>
+<x-dc>
 <div data-ripple-host="1" style="isolation:isolate;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden;background:var(--page-bg, radial-gradient(55% 38% at 12% 0%, rgba(30,64,140,.32), transparent 70%), radial-gradient(45% 32% at 92% 35%, rgba(22,48,110,.22), transparent 70%), radial-gradient(55% 35% at 25% 95%, rgba(26,52,120,.2), transparent 70%), #000);background-attachment:fixed;">
   <dc-import name="TopNav" active="Coaches" style="position:sticky;top:0;z-index:20;display:block;" hint-size="100%,62px"></dc-import>
 
